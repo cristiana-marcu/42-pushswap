@@ -6,14 +6,17 @@
 /*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 12:02:39 by cmarcu            #+#    #+#             */
-/*   Updated: 2021/05/27 16:18:42 by cmarcu           ###   ########.fr       */
+/*   Updated: 2021/05/28 11:57:50 by cmarcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include <unistd.h>
-# include <fcntl.h>
-# include <stdlib.h>
-# include <stdio.h>
+#ifndef PUSH_SWAP_H
+# define PUSH_SWAP_H
+
+# include <unistd.h> // Null
+# include <fcntl.h> // File control: open, read, close
+# include <stdlib.h> // Malloc, free
+# include <stdio.h> // Printf, scanf
 
 typedef struct s_swap
 {
@@ -27,3 +30,5 @@ typedef struct s_list
 } t_list;
 
 int	ft_atoi(const char *str);
+
+#endif
