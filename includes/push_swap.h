@@ -6,7 +6,7 @@
 /*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 12:02:39 by cmarcu            #+#    #+#             */
-/*   Updated: 2021/05/28 11:57:50 by cmarcu           ###   ########.fr       */
+/*   Updated: 2021/06/01 20:37:09 by cmarcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,21 @@
 # include <stdlib.h> // Malloc, free
 # include <stdio.h> // Printf, scanf
 
-typedef struct s_swap
-{
-	int		**numbers;
-} t_swap;
-
 typedef struct s_list
 {
 	int				content;
 	struct s_list	*next;
 } t_list;
 
+typedef struct s_swap
+{
+	t_list *stack_a;
+	t_list *stack_b;
+	int moves;
+	int repeated;
+} t_swap;
+
 int	ft_atoi(const char *str);
+void push_swap_fill(int argc, char **argv, t_swap *swap);
 
 #endif

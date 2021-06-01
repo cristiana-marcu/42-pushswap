@@ -6,7 +6,7 @@
 /*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/08 18:09:38 by cmarcu            #+#    #+#             */
-/*   Updated: 2021/05/28 19:10:03 by cmarcu           ###   ########.fr       */
+/*   Updated: 2021/06/01 17:27:05 by cmarcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	ft_atoi(const char *str)
 		a++;
 	if (str[a] == '\0' || str[a] < '0' || str[a] > '9')
 		printf("Invalid number");
-	while (ft_isdigit(str[a]))
+	while (str[a] >= '0' && str[a] <= '9')
 	{
 		number = number * 10 + (str[a] - '0');
 		a++;
