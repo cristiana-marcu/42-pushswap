@@ -78,18 +78,16 @@ static int	ft_isspace(char *str)
 	return (a);
 }
 
-int	ft_isdigit(int c)
+void print_error()
 {
-	if (c >= '0' && c <= '9')
-		return (1);
-	else
-		return (0);
+		printf("Error\n");
+		exit(1);
 }
 
 int	ft_atoi(const char *str)
 {
 	int	a;
-	int	number;
+	long number;
 	int	is_neg;
 
 	a = ft_isspace((char *)str);
@@ -102,39 +100,74 @@ int	ft_atoi(const char *str)
 	}
 	else if (str[a] == '+')
 		a++;
-	while (ft_isdigit(str[a]))
+	while (str[a] >= '0' && str[a] <= '9')
 	{
 		number = number * 10 + (str[a] - '0');
 		a++;
 	}
+	if ((is_neg && -number < INT_MIN) || number > INT_MAX)
+		print_error();
 	if (is_neg)
 		return (-number);
 	else
 		return (number);
 }
 
-void push_swap_fill(int argc, char **argv, t_swap *swap)
+void	check_repeated(t_swap *swap, t_list *stack_a)
 {
-	int 	i;
-	int 	j;
+	t_list *ptr;
 
-	i = 1;
+	if (stack_a)
+	{
+		while (stack_a)
+		{
+			if (stack_a->content == swap->repeated)
+				print_error();
+			ptr = stack_a->next;
+			stack_a = ptr;
+		}
+	}
+}
+
+void	check_for_letters(int i, char **argv)
+{
+	int j;
+
+	j = 0;
 	while (argv[i])
 	{
 		j = 0;
 		while (argv[i][j])
 		{
 			if (!((argv[i][j] <= '9' && argv[i][j] >= '0')
-			|| (j == 0 && argv[i][j] == '-')))
-				printf("Error\n");
+			|| (j == 0 && argv[i][j] == '-') || (j == 0 && argv[i][j] == '+')))
+				print_error();
 			j++;
 		}
-		ft_lstadd_back(&swap->stack_a, ft_lstnew(ft_atoi(argv[i])));
+		i++;
+	}
+}
+
+void push_swap_fill(int argc, char **argv, t_swap *swap)
+{
+	int 	i;
+	int 	j;
+	int		num;
+
+	i = 1;
+	while (argv[i])
+	{
+		j = 0;
+		check_for_letters(i, argv);
+		num = ft_atoi(argv[i]);
+		swap->repeated = num;
+		check_repeated(swap, swap->stack_a);
+		ft_lstadd_back(&swap->stack_a, ft_lstnew(num));
 		i++;
 	}
 	ft_lstiter(swap->stack_a, f);
 	printf("Number of args: %d\n", argc);
-	printf("Number of nums: %d", i - 1);
+	printf("Number of nums: %d\n", i - 1);
 }
 
 int main(int argc, char **argv)

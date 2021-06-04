@@ -17,6 +17,7 @@
 # include <fcntl.h> // File control: open, read, close
 # include <stdlib.h> // Malloc, free
 # include <stdio.h> // Printf, scanf
+# include <limits.h> // Int min and max values
 
 typedef struct s_list
 {
