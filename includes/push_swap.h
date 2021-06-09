@@ -6,7 +6,7 @@
 /*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 12:02:39 by cmarcu            #+#    #+#             */
-/*   Updated: 2021/06/01 20:37:09 by cmarcu           ###   ########.fr       */
+/*   Updated: 2021/06/09 18:11:11 by cmarcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,26 @@ typedef struct s_swap
 } t_swap;
 
 int	ft_atoi(const char *str);
+int	ft_isspace(char *str);
+
 void push_swap_fill(int argc, char **argv, t_swap *swap);
+void	check_for_letters(int i, char **argv);
+void	check_repeated(t_swap *swap, t_list *stack_a);
+
+void	ft_lstdelone(t_list *lst);
+void	ft_lstiter(t_list *lst, void (*f)(int));
+void	ft_lstadd_front(t_list **alst, t_list *new);
+void	ft_lstadd_back(t_list **lst, t_list *new);
+t_list	*ft_lstlast(t_list *lst);
+t_list	*ft_lstnew(int content);
+
+int	swap_rule(t_swap *swap, t_list *stack);
+void	sa(t_swap *swap);
+void	sb(t_swap *swap);
+void	ss(t_swap *swap);
+void	pa(t_swap **swap);
+void	pb(t_swap **swap);
+
+void print_error();
 
 #endif

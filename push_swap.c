@@ -6,7 +6,7 @@
 /*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 12:02:00 by cmarcu            #+#    #+#             */
-/*   Updated: 2021/06/01 21:09:13 by cmarcu           ###   ########.fr       */
+/*   Updated: 2021/06/09 18:22:46 by cmarcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,16 @@ void	ft_lstadd_back(t_list **lst, t_list *new)
 	}
 }
 
+void	ft_lstadd_front(t_list **alst, t_list *new)
+{
+	if (alst)
+	{
+		if (*alst)
+			new->next = *alst;
+		*alst = new;
+	}
+}
+
 void	ft_lstiter(t_list *lst, void (*f)(int))
 {
 	if (!lst || !f)
@@ -62,12 +72,19 @@ void	ft_lstiter(t_list *lst, void (*f)(int))
 	}
 }
 
+void	ft_lstdelone(t_list *lst)
+{
+	if (!lst)
+		return ;
+	free(lst);
+}
+
 void	f(int n)
 {
 	printf("%d\n", n);
 }
 
-static int	ft_isspace(char *str)
+int	ft_isspace(char *str)
 {
 	int	a;
 
@@ -177,4 +194,10 @@ int main(int argc, char **argv)
 	if (argc < 2)
 	 	return (0);
 	push_swap_fill(argc, argv, &push_swap);
+	//push_swap.moves = 0; Hay que inicializarlo en algún lugar??
+	sa(&push_swap);
+	ft_lstiter(push_swap.stack_a, f);
+	pb(&push_swap);
+	ft_lstiter(push_swap.stack_a, f);
+	printf("Number of moves: %d", push_swap.moves);
 }
