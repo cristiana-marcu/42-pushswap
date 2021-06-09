@@ -6,7 +6,7 @@
 /*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 12:02:00 by cmarcu            #+#    #+#             */
-/*   Updated: 2021/06/09 18:22:46 by cmarcu           ###   ########.fr       */
+/*   Updated: 2021/06/09 18:30:01 by cmarcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,6 +185,9 @@ void push_swap_fill(int argc, char **argv, t_swap *swap)
 	ft_lstiter(swap->stack_a, f);
 	printf("Number of args: %d\n", argc);
 	printf("Number of nums: %d\n", i - 1);
+	// Solo para comprobar que push funciona, pero no debería estar aquí esto
+	pb(&swap);
+	ft_lstiter(swap->stack_b, f);
 }
 
 int main(int argc, char **argv)
@@ -196,8 +199,6 @@ int main(int argc, char **argv)
 	push_swap_fill(argc, argv, &push_swap);
 	//push_swap.moves = 0; Hay que inicializarlo en algún lugar??
 	sa(&push_swap);
-	ft_lstiter(push_swap.stack_a, f);
-	pb(&push_swap);
 	ft_lstiter(push_swap.stack_a, f);
 	printf("Number of moves: %d", push_swap.moves);
 }
