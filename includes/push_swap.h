@@ -6,7 +6,7 @@
 /*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 12:02:39 by cmarcu            #+#    #+#             */
-/*   Updated: 2021/06/09 18:11:11 by cmarcu           ###   ########.fr       */
+/*   Updated: 2021/06/10 19:56:31 by cmarcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ void	sb(t_swap *swap);
 void	ss(t_swap *swap);
 void	pa(t_swap **swap);
 void	pb(t_swap **swap);
+void rx(t_list **head);
 
 void print_error();
 

@@ -6,7 +6,7 @@
 /*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 12:02:00 by cmarcu            #+#    #+#             */
-/*   Updated: 2021/06/09 18:30:01 by cmarcu           ###   ########.fr       */
+/*   Updated: 2021/06/10 19:56:34 by cmarcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -187,7 +187,9 @@ void push_swap_fill(int argc, char **argv, t_swap *swap)
 	printf("Number of nums: %d\n", i - 1);
 	// Solo para comprobar que push funciona, pero no debería estar aquí esto
 	pb(&swap);
-	ft_lstiter(swap->stack_b, f);
+	ft_lstiter(swap->stack_a, f);
+	rx(&swap->stack_a);
+	ft_lstiter(swap->stack_a, f);
 }
 
 int main(int argc, char **argv)
