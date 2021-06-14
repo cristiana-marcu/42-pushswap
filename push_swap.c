@@ -6,7 +6,7 @@
 /*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 12:02:00 by cmarcu            #+#    #+#             */
-/*   Updated: 2021/06/14 17:17:25 by cmarcu           ###   ########.fr       */
+/*   Updated: 2021/06/14 21:05:08 by cmarcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,11 +188,29 @@ void push_swap_fill(int argc, char **argv, t_swap *swap)
 	// Solo para comprobar que push funciona, pero no debería estar aquí esto
 	pb(&swap);
 	pb(&swap);
-	pb(&swap);
 	ft_lstiter(swap->stack_a, f);
-	rx(&swap->stack_a, swap);
-	rx(&swap->stack_b, swap);
+	//rx(&swap->stack_a, swap);
+	rrr(&swap->stack_a, &swap->stack_b, swap);
+	ft_lstiter(swap->stack_a, f);
 	ft_lstiter(swap->stack_b, f);
+}
+
+void	push_swap_sorter(int argc, t_swap *swap)
+{
+	if (argc == 3)
+		sort_three(swap);
+}
+
+void	sort_three(t_swap *swap)
+{
+	int n1;
+	int n2;
+	int n3;
+
+	n1 = swap->stack_a->content;
+	n2 = swap->stack_a->next->content;
+	n3 = swap->stack_a->next->next->content;
+	printf("I'm hereeeeeeee %i %i %i\n", n1, n2, n3);
 }
 
 int main(int argc, char **argv)
@@ -202,8 +220,9 @@ int main(int argc, char **argv)
 	if (argc < 2)
 	 	return (0);
 	push_swap_fill(argc, argv, &push_swap);
+	push_swap_sorter(argc, &push_swap);
 	//push_swap.moves = 0; Hay que inicializarlo en algún lugar??
-	sa(&push_swap);
-	ft_lstiter(push_swap.stack_a, f);
+	//sa(&push_swap);
+	//ft_lstiter(push_swap.stack_a, f);
 	printf("Number of moves: %d", push_swap.moves);
 }
