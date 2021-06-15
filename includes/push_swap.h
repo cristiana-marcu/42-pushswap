@@ -6,7 +6,7 @@
 /*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 12:02:39 by cmarcu            #+#    #+#             */
-/*   Updated: 2021/06/14 20:51:28 by cmarcu           ###   ########.fr       */
+/*   Updated: 2021/06/15 16:26:38 by cmarcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ void	pb(t_swap **swap);
 void rx(t_list **head, t_swap *swap);
 void rrx(t_list **head, t_swap *swap);
 void rrr(t_list **head_a, t_list **head_b, t_swap *swap);
+
+void check_if_already_ok(t_list *lst);
 
 void	push_swap_sorter(int argc, t_swap *swap);
 void	sort_three(t_swap *swap);
