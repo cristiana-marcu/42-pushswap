@@ -6,7 +6,7 @@
 /*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 12:02:00 by cmarcu            #+#    #+#             */
-/*   Updated: 2021/06/15 16:48:43 by cmarcu           ###   ########.fr       */
+/*   Updated: 2021/06/15 18:36:44 by cmarcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,19 @@ void	ft_lstdelone(t_list *lst)
 	if (!lst)
 		return ;
 	free(lst);
+}
+
+int	ft_lstsize(t_list *lst)
+{
+	int	result;
+
+	result = 0;
+	while (lst)
+	{
+		lst = lst->next;
+		result++;
+	}
+	return (result);
 }
 
 void	f(int n)
@@ -182,9 +195,11 @@ void push_swap_fill(int argc, char **argv, t_swap *swap)
 		ft_lstadd_back(&swap->stack_a, ft_lstnew(num));
 		i++;
 	}
+	swap->lst_length = ft_lstsize(swap->stack_a);
 	ft_lstiter(swap->stack_a, f);
 	printf("Number of args: %d\n", argc);
 	printf("Number of nums: %d\n", i - 1);
+	printf("List size: %d\n", swap->lst_length);
 	// Solo para comprobar que push funciona, pero no debería estar aquí esto
 	//pb(&swap);
 	//pb(&swap);
@@ -195,15 +210,17 @@ void push_swap_fill(int argc, char **argv, t_swap *swap)
 	//ft_lstiter(swap->stack_b, f);
 }
 
-void	push_swap_sorter(int argc, t_swap *swap)
+void	push_swap_sorter(t_swap *swap)
 {
-	if (argc == 3)
+	if (swap->lst_length == 2)
 		sa(swap);
-	else if (argc == 4)
+	else if (swap->lst_length == 3)
 		sort_three(swap);
+	else if (swap->lst_length <= 50)
+		sort_more(swap);
 }
 
-void check_if_already_ok(t_list *lst)
+void check_sorted(t_list *lst)
 {
 	int		n;
 	t_list	*next;
@@ -251,6 +268,11 @@ void	sort_three(t_swap *swap)
 		rx(&swap->stack_a, swap);
 }
 
+void	sort_more(t_swap *swap)
+{
+
+}
+
 int main(int argc, char **argv)
 {
 	t_swap push_swap;
@@ -258,8 +280,8 @@ int main(int argc, char **argv)
 	if (argc < 2)
 	 	return (0);
 	push_swap_fill(argc, argv, &push_swap);
-	check_if_already_ok(push_swap.stack_a);
-	push_swap_sorter(argc, &push_swap);
+	check_sorted(push_swap.stack_a);
+	push_swap_sorter(&push_swap);
 	//push_swap.moves = 0; Hay que inicializarlo en algún lugar??
 	//sa(&push_swap);
 	ft_lstiter(push_swap.stack_a, f);
