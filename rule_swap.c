@@ -6,7 +6,7 @@
 /*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/09 16:33:46 by cmarcu            #+#    #+#             */
-/*   Updated: 2021/06/09 17:07:27 by cmarcu           ###   ########.fr       */
+/*   Updated: 2021/06/15 16:54:16 by cmarcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	swap_rule(t_swap *swap, t_list *stack)
 {
 	int aux;
 
-	if (stack->content && stack->next->content)
+	if (stack && stack->next)
 	{
 		aux = stack->content;
 		stack->content = stack->next->content;

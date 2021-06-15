@@ -6,7 +6,7 @@
 /*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 12:02:00 by cmarcu            #+#    #+#             */
-/*   Updated: 2021/06/15 16:24:27 by cmarcu           ###   ########.fr       */
+/*   Updated: 2021/06/15 16:48:43 by cmarcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -197,7 +197,9 @@ void push_swap_fill(int argc, char **argv, t_swap *swap)
 
 void	push_swap_sorter(int argc, t_swap *swap)
 {
-	if (argc == 4)
+	if (argc == 3)
+		sa(swap);
+	else if (argc == 4)
 		sort_three(swap);
 }
 
@@ -214,9 +216,11 @@ void check_if_already_ok(t_list *lst)
 			next = lst->next;
 			if (next)
 				if (n > next->content)
-					exit(1);
+					return ;
 			lst = next;
 		}
+		if (lst == NULL)
+			exit(1);
 	}
 }
 
