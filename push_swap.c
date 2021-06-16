@@ -270,7 +270,53 @@ void	sort_three(t_swap *swap)
 
 void	sort_more(t_swap *swap)
 {
+	int i;
+	int j;
+	int pos;
+	int min;
+	t_list *aux;
 
+	i = 1;
+	j = 0;
+	pos = 0;
+	aux = swap->stack_a;
+	min = aux->content;
+	while (swap->lst_length - j > 3)
+	{
+		while (aux)
+		{
+			if (min > aux->content)
+			{
+				min = aux->content;
+				pos = i;
+			}
+			i++;
+			aux = aux->next;
+		}
+		printf("Lower value on list is: %d, on position: %d\n", min, pos);
+		printf("Middle point on list is: %d\n", i/2);
+		if (pos <= i/2)
+		{
+			// Make a function that repeats an operation n times
+			while (pos - 1)
+			{
+				// rx not working apparently
+				rx(&swap->stack_a, swap);
+				pos--;
+			}
+		}
+		else
+		{
+			while (pos <= i)
+			{
+				rrx(&swap->stack_a, swap);
+				pos++;
+			}
+		}
+		pb(&swap);
+		j++;
+	}
+	//sort_three(swap);
 }
 
 int main(int argc, char **argv)
