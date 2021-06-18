@@ -216,7 +216,7 @@ void	push_swap_sorter(t_swap *swap)
 		sa(swap);
 	else if (swap->lst_length == 3)
 		sort_three(swap);
-	else if (swap->lst_length <= 500)
+	else if (swap->lst_length <= 50)
 		sort_more(swap);
 }
 
@@ -237,7 +237,7 @@ void check_sorted(t_list *lst)
 			lst = next;
 		}
 		if (lst == NULL)
-			exit(1);
+			exit(1); //TODO A good exit program function
 	}
 }
 
@@ -268,12 +268,40 @@ void	sort_three(t_swap *swap)
 		rx(&swap->stack_a, swap);
 }
 
+int min_position(t_list *stack)
+{
+	t_list *aux;
+	int min;
+	int pos;
+	int i;
+
+	aux = stack;
+	min = aux->content;
+	pos = 0;
+	i = 1;
+	while (aux)
+	{
+		if (min > aux->content)
+		{
+			min = aux->content;
+			pos = i;
+		}
+		i++;
+		aux = aux->next;
+	}
+	return (pos);
+}
+
+void repeat_rule(int n, void (*f)(t_list))
+{
+	
+}
+
 void	sort_more(t_swap *swap)
 {
-	int i;
+	int length;
 	int j;
 	int pos;
-	int min;
 	t_list *aux;
 	t_swap *temp;
 
@@ -281,24 +309,10 @@ void	sort_more(t_swap *swap)
 	aux = swap->stack_a;
 	while (swap->lst_length - j > 3)
 	{
-		i = 1;
-		min = aux->content;
-		pos = 0;
-		while (aux)
-		{
-			if (min > aux->content)
-			{
-				min = aux->content;
-				pos = i;
-			}
-			i++;
-			aux = aux->next;
-		}
+		pos = min_position(aux);
 		aux = swap->stack_a;
-		i--;
-		printf("Lower value on list is: %d, on position: %d\n", min, pos);
-		printf("Middle point on list is: %d\n", i / 2);
-		if (pos <= i / 2)
+		length = ft_lstsize(swap->stack_a);
+		if (pos <= length / 2)
 		{
 			// TODO Make a function that repeats an operation n times
 			while (pos - 1 > 0)
@@ -307,11 +321,9 @@ void	sort_more(t_swap *swap)
 				pos--;
 			}
 		}
-		else if (pos > i / 2)
+		else if (pos > length / 2)
 		{
-			//printf("i: %d\n", i);
-			//printf("pos: %d\n", pos);
-			while (pos <= i)
+			while (pos <= length)
 			{
 				rrx(&aux, swap);
 				pos++;
@@ -320,7 +332,6 @@ void	sort_more(t_swap *swap)
 		swap->stack_a = aux;
 		pb(&swap);
 		aux = swap->stack_a;
-		printf("Stack b is\n");
 		ft_lstiter(swap->stack_b, f);
 		j++;
 	}

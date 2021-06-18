@@ -62,7 +62,9 @@ void check_sorted(t_list *lst);
 
 void	push_swap_sorter(t_swap *swap);
 void	sort_three(t_swap *swap);
+
 void	sort_more(t_swap *swap);
+int min_position(t_list *stack);
 
 void print_error();
 
