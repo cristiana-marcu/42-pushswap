@@ -216,7 +216,7 @@ void	push_swap_sorter(t_swap *swap)
 		sa(swap);
 	else if (swap->lst_length == 3)
 		sort_three(swap);
-	else if (swap->lst_length <= 50)
+	else if (swap->lst_length <= 500)
 		sort_more(swap);
 }
 
@@ -275,14 +275,15 @@ void	sort_more(t_swap *swap)
 	int pos;
 	int min;
 	t_list *aux;
+	t_swap *temp;
 
-	i = 1;
 	j = 0;
-	pos = 0;
 	aux = swap->stack_a;
-	min = aux->content;
 	while (swap->lst_length - j > 3)
 	{
+		i = 1;
+		min = aux->content;
+		pos = 0;
 		while (aux)
 		{
 			if (min > aux->content)
@@ -293,30 +294,43 @@ void	sort_more(t_swap *swap)
 			i++;
 			aux = aux->next;
 		}
+		aux = swap->stack_a;
+		i--;
 		printf("Lower value on list is: %d, on position: %d\n", min, pos);
-		printf("Middle point on list is: %d\n", i/2);
-		if (pos <= i/2)
+		printf("Middle point on list is: %d\n", i / 2);
+		if (pos <= i / 2)
 		{
-			// Make a function that repeats an operation n times
-			while (pos - 1)
+			// TODO Make a function that repeats an operation n times
+			while (pos - 1 > 0)
 			{
-				// rx not working apparently
-				rx(&swap->stack_a, swap);
+				rx(&aux, swap);
 				pos--;
 			}
 		}
-		else
+		else if (pos > i / 2)
 		{
+			//printf("i: %d\n", i);
+			//printf("pos: %d\n", pos);
 			while (pos <= i)
 			{
-				rrx(&swap->stack_a, swap);
+				rrx(&aux, swap);
 				pos++;
 			}
 		}
+		swap->stack_a = aux;
 		pb(&swap);
+		aux = swap->stack_a;
+		printf("Stack b is\n");
+		ft_lstiter(swap->stack_b, f);
 		j++;
 	}
-	//sort_three(swap);
+	sort_three(swap);
+	aux = swap->stack_b;
+	while (aux)
+	{
+		pa(&swap);
+		aux = aux->next;
+	}
 }
 
 int main(int argc, char **argv)
@@ -327,8 +341,8 @@ int main(int argc, char **argv)
 	 	return (0);
 	push_swap_fill(argc, argv, &push_swap);
 	check_sorted(push_swap.stack_a);
+	push_swap.moves = 0; //Hay que inicializarlo en algún lugar??
 	push_swap_sorter(&push_swap);
-	//push_swap.moves = 0; Hay que inicializarlo en algún lugar??
 	//sa(&push_swap);
 	ft_lstiter(push_swap.stack_a, f);
 	printf("Number of moves: %d", push_swap.moves);
