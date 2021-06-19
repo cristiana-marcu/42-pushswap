@@ -292,9 +292,66 @@ int min_position(t_list *stack)
 	return (pos);
 }
 
-void repeat_rule(int n, void (*f)(t_list))
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
+	size_t	a;
+
+	a = 0;
+	while (n && s1[a] != '\0' && s1[a] == s2[a])
+	{
+		a++;
+		--n;
+	}
+	if (n == 0)
+		return (0);
+	else
+		return ((int)(unsigned char)(s1[a]) - (int)(unsigned char)(s2[a]));
+}
+
+void repeat_rule_rotate(int n, char *str, t_list **head, t_swap *swap)
+{
+	int i;
 	
+	i = 0;
+	if (!(ft_strncmp(str, "rx", 2)))
+	{
+		while (i < n)
+		{
+			rx(head, swap);
+			i++;
+		}
+	}
+	else if (!(ft_strncmp(str, "rrx", 3)))
+	{
+		while (i < n)
+		{
+			rrx(head, swap);
+			i++;
+		}
+	}
+}
+
+void repeat_rule_push(int n, char *str, t_swap **swap)
+{
+	int i;
+	
+	i = 0;
+	if (!(ft_strncmp(str, "pa", 2)))
+	{
+		while (i < n)
+		{
+			pa(swap);
+			i++;
+		}
+	}
+	else if (!(ft_strncmp(str, "pb", 2)))
+	{
+		while (i < n)
+		{
+			pb(swap);
+			i++;
+		}
+	}
 }
 
 void	sort_more(t_swap *swap)
@@ -305,43 +362,23 @@ void	sort_more(t_swap *swap)
 	t_list *aux;
 	t_swap *temp;
 
-	j = 0;
+	j = -1;
 	aux = swap->stack_a;
-	while (swap->lst_length - j > 3)
+	while (swap->lst_length - ++j > 3)
 	{
 		pos = min_position(aux);
-		aux = swap->stack_a;
 		length = ft_lstsize(swap->stack_a);
+		printf("Position of min value on list: %d\n", pos);
 		if (pos <= length / 2)
-		{
-			// TODO Make a function that repeats an operation n times
-			while (pos - 1 > 0)
-			{
-				rx(&aux, swap);
-				pos--;
-			}
-		}
+			repeat_rule_rotate(pos - 1, "rx", &aux, swap);
 		else if (pos > length / 2)
-		{
-			while (pos <= length)
-			{
-				rrx(&aux, swap);
-				pos++;
-			}
-		}
+			repeat_rule_rotate(length - pos + 1, "rrx", &aux, swap);
 		swap->stack_a = aux;
 		pb(&swap);
 		aux = swap->stack_a;
-		ft_lstiter(swap->stack_b, f);
-		j++;
 	}
 	sort_three(swap);
-	aux = swap->stack_b;
-	while (aux)
-	{
-		pa(&swap);
-		aux = aux->next;
-	}
+	repeat_rule_push(ft_lstsize(swap->stack_b), "pa", &swap);
 }
 
 int main(int argc, char **argv)
