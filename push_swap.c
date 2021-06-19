@@ -389,7 +389,7 @@ int main(int argc, char **argv)
 	 	return (0);
 	push_swap_fill(argc, argv, &push_swap);
 	check_sorted(push_swap.stack_a);
-	push_swap.moves = 0; //Hay que inicializarlo en algún lugar??
+	//push_swap.moves = 0; //Hay que inicializarlo en algún lugar??
 	push_swap_sorter(&push_swap);
 	//sa(&push_swap);
 	ft_lstiter(push_swap.stack_a, f);
