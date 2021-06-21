@@ -6,7 +6,7 @@
 /*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 12:02:39 by cmarcu            #+#    #+#             */
-/*   Updated: 2021/06/21 19:23:16 by cmarcu           ###   ########.fr       */
+/*   Updated: 2021/06/21 19:27:52 by cmarcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ void fill_chunk(t_swap *swap, int *chunk, int *stack_copy);
 void push_back(t_swap *swap);
 int max_position(t_list *stack);
 void get_to_top(int pos, t_swap *swap);
+void get_to_top_b(int pos, t_swap *swap);
 int retrieve_position(t_swap *swap, int *chunk, int*stack);
 
 void print_error();

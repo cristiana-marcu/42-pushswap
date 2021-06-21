@@ -6,7 +6,7 @@
 /*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 12:02:00 by cmarcu            #+#    #+#             */
-/*   Updated: 2021/06/21 19:23:18 by cmarcu           ###   ########.fr       */
+/*   Updated: 2021/06/21 19:27:58 by cmarcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -468,10 +468,18 @@ int retrieve_position(t_swap *swap, int *chunk, int*stack)
 
 void get_to_top(int pos, t_swap *swap)
 {
-	if (pos < swap->lst_length / 2)
+	if (pos <= swap->lst_length / 2)
 		repeat_rule_rotate(pos, "rx", &swap->stack_a, swap);
 	else if (pos > swap->lst_length / 2)
-		repeat_rule_rotate(swap->lst_length - pos, "rrx", &swap->stack_a, swap);
+		repeat_rule_rotate(swap->lst_length - pos + 1, "rrx", &swap->stack_a, swap);
+}
+
+void get_to_top_b(int pos, t_swap *swap)
+{
+	if (pos <= swap->lst_length / 2)
+		repeat_rule_rotate(pos, "rx", &swap->stack_b, swap);
+	else if (pos > swap->lst_length / 2)
+		repeat_rule_rotate(swap->lst_length - pos + 1, "rrx", &swap->stack_b, swap);
 }
 
 int max_position(t_list *stack)
@@ -507,7 +515,7 @@ void push_back(t_swap *swap)
 	while (aux)
 	{
 		position = max_position(swap->stack_b);
-		get_to_top(position, swap);
+		get_to_top_b(position, swap);
 		pa(&swap);
 		aux = aux->next;
 	}
