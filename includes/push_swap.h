@@ -6,7 +6,7 @@
 /*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 12:02:39 by cmarcu            #+#    #+#             */
-/*   Updated: 2021/06/15 18:10:46 by cmarcu           ###   ########.fr       */
+/*   Updated: 2021/06/21 19:23:16 by cmarcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,12 @@ typedef struct s_swap
 	int moves;
 	int repeated;
 	int lst_length;
+	int chunk_length;
 } t_swap;
 
 int	ft_atoi(const char *str);
 int	ft_isspace(char *str);
+int	ft_strncmp(const char *s1, const char *s2, size_t n);
 
 void push_swap_fill(int argc, char **argv, t_swap *swap);
 void	check_for_letters(int i, char **argv);
@@ -64,7 +66,18 @@ void	push_swap_sorter(t_swap *swap);
 void	sort_three(t_swap *swap);
 
 void	sort_more(t_swap *swap);
+void repeat_rule_push(int n, char *str, t_swap **swap);
+void repeat_rule_rotate(int n, char *str, t_list **head, t_swap *swap);
 int min_position(t_list *stack);
+
+void chunk_algorithm(t_swap *swap);
+int number_of_chunks(int lst_length);
+void copy_stack_to_array(t_list *stack, int *stack_copy);
+void fill_chunk(t_swap *swap, int *chunk, int *stack_copy);
+void push_back(t_swap *swap);
+int max_position(t_list *stack);
+void get_to_top(int pos, t_swap *swap);
+int retrieve_position(t_swap *swap, int *chunk, int*stack);
 
 void print_error();
 
