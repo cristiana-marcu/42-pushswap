@@ -483,9 +483,9 @@ void get_to_top_b(int pos, t_swap *swap)
 	int b_length;
 
 	b_length = ft_lstsize(swap->stack_b);
-	if (pos <= swap->lst_length / 2)
+	if (pos <= b_length / 2)
 		repeat_rule_rotate(pos, "rx", &swap->stack_b, swap);
-	else if (pos > swap->lst_length / 2)
+	else if (pos > b_length / 2)
 		repeat_rule_rotate(b_length - pos, "rrx", &swap->stack_b, swap);
 }
 
@@ -535,7 +535,6 @@ void push_back(t_swap *swap)
 		ft_lstiter(swap->stack_b, f);
 		i++;
 	}
-	//pa(&swap);
 }
 
 void chunk_algorithm(t_swap *swap)
