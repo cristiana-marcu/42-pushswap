@@ -284,7 +284,7 @@ int min_position(t_list *stack)
 	aux = stack;
 	min = aux->content;
 	pos = 0;
-	i = 1;
+	i = 0;
 	while (aux)
 	{
 		if (min > aux->content)
@@ -392,31 +392,29 @@ int number_of_chunks(int lst_length)
 	return ((lst_length + 233.333333) / 66.666666);
 }
 
-void fill_chunk(t_swap *swap, int *chunk, int *stack_copy) //stk_size tiene el tamaño del stack,
-//chnum el tamaño del chunk, chunk es el array donde almacenaré los numeros del chunk,
-// y num es un array con los numeros del stack_a
+void fill_chunk(t_swap *swap, int *chunk, int *stack_copy)
 {
 	int j;
 	int i;
 	int chunk_length;
 
 	chunk_length = swap->lst_length / number_of_chunks(swap->lst_length);
-	//printf("Chunk length %d\n", chunk_length);
+	printf("Chunk length %d\n", chunk_length);
 	j = 1;
-	//printf("Min position in stack %d\n", min_position(swap->stack_a));
-	chunk[0] = stack_copy[min_position(swap->stack_a) - 1]; //la funcion small busca el numero más pequeño del stack.
-	//printf("Chunk[0] %d\n", chunk[0]);
-	while (j < chunk_length) //bucle que se repite hasta llegar al final del chunk.
+	printf("Min position in stack %d\n", min_position(swap->stack_a));
+	chunk[0] = stack_copy[min_position(swap->stack_a)];
+	printf("Chunk[0] %d\n", chunk[0]);
+	while (j < chunk_length)
 	{
 		chunk[j] = INT_MAX;
 		i = 0;
-		while (i < swap->lst_length) //bucle que se repite hasta llegar al final del stack
+		while (i < swap->lst_length)
 		{
-			if ((stack_copy[i] < chunk[j]) && (stack_copy[i] > chunk[j - 1])) //Linea que te explico en el siguiente mensaje
+			if ((stack_copy[i] < chunk[j]) && (stack_copy[i] > chunk[j - 1]))
 				chunk[j] = stack_copy[i];
 			i++;
 		}
-		printf("In chunk %d\n", chunk[j-1]);
+		printf("In chunk %d\n", chunk[j]);
 		j++;
 	}
 }
@@ -441,26 +439,32 @@ int retrieve_position(t_swap *swap, int *chunk, int*stack)
 	int i;
 	int hold_first;
 	int hold_second;
+	int lst_length;
 
+	lst_length = ft_lstsize(swap->stack_a);
+	printf("Last chunk item> %d\n", chunk[swap->chunk_length - 1]);
 	i = -1;
-	while (++i < swap->lst_length / 2)
+	while (++i < lst_length / 2)
 	{
-		if (stack[i] >= chunk[0] && stack[i] <= chunk[swap->chunk_length - 1])
+		if ((stack[i] >= chunk[0]) && (stack[i] <= chunk[swap->chunk_length - 1]))
 		{
 			hold_first = i;
 			break ;
 		}
 	}
-	i = swap->lst_length;
-	while (--i >= swap->lst_length / 2)
+	i = lst_length;
+	while (--i >= lst_length / 2)
 	{
-		if (stack[i] >= chunk[0] && stack[i] <= chunk[swap->chunk_length - 1])
+		if ((stack[i] >= chunk[0]) && (stack[i] <= chunk[swap->chunk_length - 1]))
 		{
 			hold_second = i;
 			break ;
 		}
 	}
-	if ((hold_first < swap->lst_length - hold_second) && hold_second >= 0 && hold_first >= 0)
+	printf("Hold first> %d\n", hold_first);
+	printf("Hold second> %d\n", hold_second);
+	// Fix return values 
+	if (((hold_first < swap->lst_length - hold_second) && hold_second >= 0 && hold_first >= 0) || hold_second > swap->lst_length)
 		return (hold_first);
 	else
 		return (hold_second);
@@ -476,10 +480,13 @@ void get_to_top(int pos, t_swap *swap)
 
 void get_to_top_b(int pos, t_swap *swap)
 {
+	int b_length;
+
+	b_length = ft_lstsize(swap->stack_b);
 	if (pos <= swap->lst_length / 2)
 		repeat_rule_rotate(pos, "rx", &swap->stack_b, swap);
 	else if (pos > swap->lst_length / 2)
-		repeat_rule_rotate(swap->lst_length - pos + 1, "rrx", &swap->stack_b, swap);
+		repeat_rule_rotate(b_length - pos, "rrx", &swap->stack_b, swap);
 }
 
 int max_position(t_list *stack)
@@ -492,7 +499,7 @@ int max_position(t_list *stack)
 	aux = stack;
 	max = aux->content;
 	pos = 0;
-	i = 1;
+	i = 0;
 	while (aux)
 	{
 		if (max < aux->content)
@@ -508,17 +515,27 @@ int max_position(t_list *stack)
 
 void push_back(t_swap *swap)
 {
-	t_list *aux;
 	int position;
+	int i;
+	int b_length;
 
-	aux = swap->stack_b;
-	while (aux)
+	printf("Stack_b when arrives to push back:\n");
+	printf("List size: %d\n", swap->lst_length);
+	printf("stack_b size: %d\n", ft_lstsize(swap->stack_b));
+	ft_lstiter(swap->stack_b, f);
+	b_length = ft_lstsize(swap->stack_b);
+	i = 0;
+	while (i < b_length)
 	{
 		position = max_position(swap->stack_b);
+		printf("Position: %d\n", position);
 		get_to_top_b(position, swap);
 		pa(&swap);
-		aux = aux->next;
+		printf("Stack_b after push to a:\n");
+		ft_lstiter(swap->stack_b, f);
+		i++;
 	}
+	//pa(&swap);
 }
 
 void chunk_algorithm(t_swap *swap)
@@ -541,7 +558,9 @@ void chunk_algorithm(t_swap *swap)
 		i = 0;
 		while (i < swap->chunk_length)
 		{
+			copy_stack_to_array(swap->stack_a, stack_copy);
 			position = retrieve_position(swap, chunk, stack_copy);
+			printf("Position: %d\n", position);
 			get_to_top(position, swap);
 			pb(&swap);
 			i++;
