@@ -550,6 +550,6 @@ int main(int argc, char **argv)
 	push_swap_fill(argv, &push_swap);
 	check_sorted(push_swap.stack_a);
 	push_swap_sorter(&push_swap);
-	//printf("Number of moves: %d\n", push_swap.moves);
+	printf("Number of moves: %d\n", push_swap.moves);
 	//ft_lstiter(push_swap.stack_a, f);
 }
