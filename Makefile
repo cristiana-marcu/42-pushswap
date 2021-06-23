@@ -34,7 +34,7 @@ $(NAME): $(OBJS) $(LIBFT)
 $(LIBFT):
 	make re -C $(LIBFTPATH)
 
-ARG :=	$(shell seq 0 49 | sort -R)
+ARG :=	$(shell seq 0 9 | sort -R)
 
 exe: $(NAME)
 	./push_swap $(ARG)
