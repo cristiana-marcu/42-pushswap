@@ -39,7 +39,7 @@ int	ft_atoi(const char *str);
 int	ft_isspace(char *str);
 int	ft_strncmp(const char *s1, const char *s2, size_t n);
 
-void push_swap_fill(int argc, char **argv, t_swap *swap);
+void push_swap_fill(char **argv, t_swap *swap);
 void	check_for_letters(int i, char **argv);
 void	check_repeated(t_swap *swap, t_list *stack_a);
 

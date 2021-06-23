@@ -15,32 +15,58 @@
 // pa | pb | pp -> Toma el primer elemento en la parte superior de a ó b y ponerlo en la
 // parte superior de a ó b. No hace nada si a ó b está vacío.
 
-void	pa(t_swap **swap)
+void		pb(t_swap **head)
 {
-	if((*swap)->stack_b)
+	t_list	*tmp;
+	t_list	*to;
+	t_list	*from;
+
+	to = (*head)->stack_b;
+	from = (*head)->stack_a;
+	if (!from)
+		return ;
+	tmp = from;
+	from = from->next;
+	(*head)->stack_a = from;
+	if (!to)
 	{
-		ft_lstadd_front(&(*swap)->stack_a, ft_lstnew((*swap)->stack_b->content));
-		ft_lstdelone((*swap)->stack_b);
-		if ((*swap)->stack_b->next)
-			(*swap)->stack_b = (*swap)->stack_b->next;
-		else
-			(*swap)->stack_b = NULL;
-		(*swap)->moves += 1;
-		write(1, "pa\n", 3);
+		to = tmp;
+		to->next = NULL;
+		(*head)->stack_b = to;
 	}
+	else
+	{
+		tmp->next = to;
+		(*head)->stack_b = tmp;
+	}
+	(*head)->moves += 1;
+	write(1, "pb\n", 3);
 }
 
-void	pb(t_swap **swap)
+void		pa(t_swap **head)
 {
-	if((*swap)->stack_a)
+	t_list	*tmp;
+	t_list	*to;
+	t_list	*from;
+
+	to = (*head)->stack_a;
+	from = (*head)->stack_b;
+	if (!from)
+		return ;
+	tmp = from;
+	from = from->next;
+	(*head)->stack_b = from;
+	if (!to)
 	{
-		ft_lstadd_front(&(*swap)->stack_b, ft_lstnew((*swap)->stack_a->content));
-		ft_lstdelone((*swap)->stack_a);
-		if ((*swap)->stack_a->next)
-			(*swap)->stack_a = (*swap)->stack_a->next;
-		else
-			(*swap)->stack_a = NULL;
-		(*swap)->moves += 1;
-		write(1, "pb\n", 3);
+		to = tmp;
+		to->next = NULL;
+		(*head)->stack_a = to;
 	}
+	else
+	{
+		tmp->next = to;
+		(*head)->stack_a = tmp;
+	}
+	(*head)->moves += 1;
+	write(1, "pa\n", 3);
 }

@@ -10,7 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-SRCS = push_swap.c rule_swap.c
+SRCS = push_swap.c rule_swap.c rule_push.c rule_rotate.c
 OBJS = $(SRCS:.c=.o)
 
 NAME = push_swap
@@ -33,6 +33,14 @@ $(NAME): $(OBJS) $(LIBFT)
 
 $(LIBFT):
 	make re -C $(LIBFTPATH)
+
+ARG :=	$(shell seq 0 49 | sort -R)
+
+exe: $(NAME)
+	./push_swap $(ARG)
+
+check: $(NAME)
+	./push_swap $(ARG) | ./checker_Mac $(ARG)
 
 clean:
 	$(RM) $(OBJS)

@@ -74,9 +74,8 @@ void	ft_lstiter(t_list *lst, void (*f)(int))
 
 void	ft_lstdelone(t_list *lst)
 {
-	if (!lst)
-		return ;
-	free(lst);
+	if (lst)
+		free(lst);
 }
 
 int	ft_lstsize(t_list *lst)
@@ -178,7 +177,7 @@ void	check_for_letters(int i, char **argv)
 	}
 }
 
-void push_swap_fill(int argc, char **argv, t_swap *swap)
+void push_swap_fill(char **argv, t_swap *swap)
 {
 	int 	i;
 	int 	j;
@@ -196,18 +195,6 @@ void push_swap_fill(int argc, char **argv, t_swap *swap)
 		i++;
 	}
 	swap->lst_length = ft_lstsize(swap->stack_a);
-	//ft_lstiter(swap->stack_a, f);
-	printf("Number of args: %d\n", argc);
-	printf("Number of nums: %d\n", i - 1);
-	printf("List size: %d\n", swap->lst_length);
-	// Solo para comprobar que push funciona, pero no debería estar aquí esto
-	//pb(&swap);
-	//pb(&swap);
-	//ft_lstiter(swap->stack_a, f);
-	//rx(&swap->stack_a, swap);
-	//rrr(&swap->stack_a, &swap->stack_b, swap);
-	//ft_lstiter(swap->stack_a, f);
-	//ft_lstiter(swap->stack_b, f);
 }
 
 void	push_swap_sorter(t_swap *swap)
@@ -216,7 +203,7 @@ void	push_swap_sorter(t_swap *swap)
 		sa(swap);
 	else if (swap->lst_length == 3)
 		sort_three(swap);
-	else if (swap->lst_length <= 5)
+	else if (swap->lst_length <= 50)
 		sort_more(swap);
 	else
 	{
@@ -366,7 +353,6 @@ void	sort_more(t_swap *swap)
 	int j;
 	int pos;
 	t_list *aux;
-	t_swap *temp;
 
 	j = -1;
 	aux = swap->stack_a;
@@ -374,11 +360,10 @@ void	sort_more(t_swap *swap)
 	{
 		pos = min_position(aux);
 		length = ft_lstsize(swap->stack_a);
-		printf("Position of min value on list: %d\n", pos);
 		if (pos <= length / 2)
-			repeat_rule_rotate(pos - 1, "rx", &aux, swap);
+			repeat_rule_rotate(pos, "rx", &aux, swap);
 		else if (pos > length / 2)
-			repeat_rule_rotate(length - pos + 1, "rrx", &aux, swap);
+			repeat_rule_rotate(length - pos, "rrx", &aux, swap);
 		swap->stack_a = aux;
 		pb(&swap);
 		aux = swap->stack_a;
@@ -399,11 +384,8 @@ void fill_chunk(t_swap *swap, int *chunk, int *stack_copy)
 	int chunk_length;
 
 	chunk_length = swap->lst_length / number_of_chunks(swap->lst_length);
-	printf("Chunk length %d\n", chunk_length);
 	j = 1;
-	printf("Min position in stack %d\n", min_position(swap->stack_a));
 	chunk[0] = stack_copy[min_position(swap->stack_a)];
-	printf("Chunk[0] %d\n", chunk[0]);
 	while (j < chunk_length)
 	{
 		chunk[j] = INT_MAX;
@@ -414,7 +396,6 @@ void fill_chunk(t_swap *swap, int *chunk, int *stack_copy)
 				chunk[j] = stack_copy[i];
 			i++;
 		}
-		printf("In chunk %d\n", chunk[j]);
 		j++;
 	}
 }
@@ -442,8 +423,9 @@ int retrieve_position(t_swap *swap, int *chunk, int*stack)
 	int lst_length;
 
 	lst_length = ft_lstsize(swap->stack_a);
-	printf("Last chunk item> %d\n", chunk[swap->chunk_length - 1]);
 	i = -1;
+	hold_first = 0;
+	hold_second = lst_length - 1;
 	while (++i < lst_length / 2)
 	{
 		if ((stack[i] >= chunk[0]) && (stack[i] <= chunk[swap->chunk_length - 1]))
@@ -461,8 +443,6 @@ int retrieve_position(t_swap *swap, int *chunk, int*stack)
 			break ;
 		}
 	}
-	printf("Hold first> %d\n", hold_first);
-	printf("Hold second> %d\n", hold_second);
 	// Fix return values 
 	if (((hold_first < swap->lst_length - hold_second) && hold_second >= 0 && hold_first >= 0) || hold_second > swap->lst_length)
 		return (hold_first);
@@ -519,28 +499,19 @@ void push_back(t_swap *swap)
 	int i;
 	int b_length;
 
-	printf("Stack_b when arrives to push back:\n");
-	printf("List size: %d\n", swap->lst_length);
-	printf("stack_b size: %d\n", ft_lstsize(swap->stack_b));
-	ft_lstiter(swap->stack_b, f);
 	b_length = ft_lstsize(swap->stack_b);
 	i = 0;
 	while (i < b_length)
 	{
 		position = max_position(swap->stack_b);
-		printf("Position: %d\n", position);
 		get_to_top_b(position, swap);
 		pa(&swap);
-		printf("Stack_b after push to a:\n");
-		ft_lstiter(swap->stack_b, f);
 		i++;
 	}
 }
 
 void chunk_algorithm(t_swap *swap)
 {
-	/* Things I need: number of chunks, size of chunk, an int array copy of the stack
-	* an int array of size of chunk */
 	int *stack_copy;
 	int *chunk;
 	int position;
@@ -559,7 +530,6 @@ void chunk_algorithm(t_swap *swap)
 		{
 			copy_stack_to_array(swap->stack_a, stack_copy);
 			position = retrieve_position(swap, chunk, stack_copy);
-			printf("Position: %d\n", position);
 			get_to_top(position, swap);
 			pb(&swap);
 			i++;
@@ -568,15 +538,7 @@ void chunk_algorithm(t_swap *swap)
 		free(chunk);
 		j++;
 	}
-	printf("Chunk[0]: %d, chunk[chunk_length-1]: %d\n", chunk[0], chunk[swap->chunk_length - 1]);
-	printf("Chunklength %d\n", swap->chunk_length);
-	printf("Position: %d\n", position);
-	printf("Stack a:\n");
-	printf("Stack b:\n");
-	ft_lstiter(swap->stack_b, f);
 	push_back(swap);
-	printf("Final:\n");
-	ft_lstiter(swap->stack_a, f);
 }
 
 int main(int argc, char **argv)
@@ -585,11 +547,9 @@ int main(int argc, char **argv)
 
 	if (argc < 2)
 	 	return (0);
-	push_swap_fill(argc, argv, &push_swap);
+	push_swap_fill(argv, &push_swap);
 	check_sorted(push_swap.stack_a);
-	//push_swap.moves = 0; //Hay que inicializarlo en algún lugar??
 	push_swap_sorter(&push_swap);
-	//sa(&push_swap);
+	//printf("Number of moves: %d\n", push_swap.moves);
 	//ft_lstiter(push_swap.stack_a, f);
-	printf("Number of moves: %d", push_swap.moves);
 }
