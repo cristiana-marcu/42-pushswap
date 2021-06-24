@@ -6,28 +6,129 @@
 /*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 12:02:00 by cmarcu            #+#    #+#             */
-/*   Updated: 2021/06/24 14:00:06 by cmarcu           ###   ########.fr       */
+/*   Updated: 2021/06/24 17:16:38 by cmarcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/push_swap.h"
 
-void push_swap_fill(char **argv, t_swap *swap)
-{
-	int 	i;
-	int 	j;
-	int		num;
 
-	i = 1;
-	while (argv[i])
+size_t	ft_strlen(const char *str)
+{
+	size_t	result;
+
+	result = 0;
+	while (*str != '\0')
 	{
+		result++;
+		str++;
+	}
+	return (result);
+}
+
+
+char	*ft_substr(char const *s, unsigned int start, size_t len)
+{
+	char	*p;
+	size_t	a;
+
+	if (!s)
+		return (NULL);
+	p = (char *)malloc(sizeof(*s) * (len + 1));
+	if (!p)
+		return (NULL);
+	if ((size_t)start >= ft_strlen(s))
+		start = ft_strlen(s);
+	a = 0;
+	while (a < len && s[start] && s[a])
+	{
+		p[a] = s[start + a];
+		a++;
+	}
+	p[a] = '\0';
+	return (p);
+}
+
+static char	**ft_mountarray(char const *s, char c)
+{
+	size_t	result;
+	char	*aux;
+	char	**array;
+
+	result = 0;
+	aux = (char *)s;
+	while (*aux)
+	{
+		while (*aux == c)
+			aux++;
+		if (*aux != '\0')
+			result++;
+		while (*aux && *aux != c)
+			aux++;
+	}
+	array = (char **)malloc((result + 1) * sizeof(char *));
+	if (!array)
+		return (NULL);
+	return (array);
+}
+
+static char	**ft_fill_array(char const *s, char **array, char c)
+{
+	size_t	i;
+	size_t	j;
+
+	i = 0;
+	j = 0;
+	while (*s)
+	{
+		while (*s == c)
+			s++;
+		if (*s != '\0')
+		{
+			while (s[j] && s[j] != c)
+				j++;
+			array[i++] = ft_substr(s, 0, j);
+			s = s + j;
+		}
 		j = 0;
-		check_for_letters(i, argv);
-		num = ft_atoi(argv[i]);
-		swap->repeated = num;
-		check_repeated(swap, swap->stack_a);
-		ft_lstadd_back(&swap->stack_a, ft_lstnew(num));
-		i++;
+	}
+	array[i] = NULL;
+	return (array);
+}
+
+char	**ft_split(char const *s, char c)
+{
+	char	**array;
+	if (!s)
+		return (NULL);
+	array = ft_mountarray(s, c);
+	if (!array)
+		return (NULL);
+	return (ft_fill_array(s, array, c));
+}
+
+void push_swap_fill(int argc, char **argv, t_swap *swap)
+{
+	int		i;
+	int		j;
+	int		num;
+	char	**temp;
+
+	j = 1;
+	while (j < argc)
+	{
+		temp = ft_split(argv[j], ' ');
+		i = 0;
+		while (temp[i])
+		{
+			check_for_letters(i, temp);
+			num = ft_atoi(temp[i]);
+			swap->repeated = num;
+			check_repeated(swap, swap->stack_a);
+			ft_lstadd_back(&swap->stack_a, ft_lstnew(num));
+			i++;
+		}
+		j++;
 	}
 	swap->lst_length = ft_lstsize(swap->stack_a);
 }
@@ -299,9 +400,9 @@ int main(int argc, char **argv)
 
 	if (argc < 2)
 	 	return (0);
-	push_swap_fill(argv, &push_swap);
+	push_swap_fill(argc, argv, &push_swap);
 	check_sorted(push_swap.stack_a);
 	push_swap_sorter(&push_swap);
 	printf("Number of moves: %d\n", push_swap.moves);
-	//ft_lstiter(push_swap.stack_a, f);
+	ft_lstiter(push_swap.stack_a, f);
 }

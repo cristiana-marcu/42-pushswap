@@ -6,7 +6,7 @@
 #    By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/26 11:58:16 by cmarcu            #+#    #+#              #
-#    Updated: 2021/06/24 13:58:28 by cmarcu           ###   ########.fr        #
+#    Updated: 2021/06/24 16:56:19 by cmarcu           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,8 +16,8 @@ OBJS = $(SRCS:.c=.o)
 NAME = push_swap
 
 CC = gcc
-CFLAGS = -Werror -Wextra -Wall -g3 -fsanitize=address
-LDFLAGS = -g3 -fsanitize=address -L$(LIBFTPATH) -lft
+CFLAGS = -Werror -Wextra -Wall
+LDFLAGS = -L$(LIBFTPATH) -lft
 RM = rm -f
 
 INCLUDES = ./includes/
@@ -34,7 +34,7 @@ $(NAME): $(OBJS) $(LIBFT)
 $(LIBFT):
 	make re -C $(LIBFTPATH)
 
-ARG :=	$(shell seq 0 9 | sort -R)
+ARG :=	$(shell seq 0 100 | sort -R)
 
 exe: $(NAME)
 	./push_swap $(ARG)

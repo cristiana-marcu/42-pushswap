@@ -6,11 +6,12 @@
 /*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 16:43:13 by cmarcu            #+#    #+#             */
-/*   Updated: 2021/03/22 15:22:25 by cmarcu           ###   ########.fr       */
+/*   Updated: 2021/06/24 17:10:51 by cmarcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+# include <stdio.h> // Printf, scanf
 
 static char	**ft_mountarray(char const *s, char c)
 {
@@ -29,6 +30,7 @@ static char	**ft_mountarray(char const *s, char c)
 		while (*aux && *aux != c)
 			aux++;
 	}
+	printf("mounting array");
 	array = (char **)malloc((result + 1) * sizeof(char *));
 	if (!array)
 		return (NULL);
@@ -62,10 +64,11 @@ static char	**ft_fill_array(char const *s, char **array, char c)
 char	**ft_split(char const *s, char c)
 {
 	char	**array;
-
+	printf("mounting array");
 	if (!s)
 		return (NULL);
 	array = ft_mountarray(s, c);
+	printf("i'm not even here");
 	if (!array)
 		return (NULL);
 	return (ft_fill_array(s, array, c));
