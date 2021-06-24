@@ -6,16 +6,16 @@
 /*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/09 17:15:55 by cmarcu            #+#    #+#             */
-/*   Updated: 2021/06/09 18:19:37 by cmarcu           ###   ########.fr       */
+/*   Updated: 2021/06/24 14:04:51 by cmarcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/push_swap.h"
 
-// pa | pb | pp -> Toma el primer elemento en la parte superior de a ó b y ponerlo en la
-// parte superior de a ó b. No hace nada si a ó b está vacío.
+// pa | pb | pp -> Toma el primer elemento en la parte superior de a ó b
+// y ponerlo en la parte superior de a ó b. No hace nada si a ó b está vacío.
 
-void		pb(t_swap **head)
+void	pb(t_swap **head)
 {
 	t_list	*tmp;
 	t_list	*to;
@@ -43,7 +43,7 @@ void		pb(t_swap **head)
 	write(1, "pb\n", 3);
 }
 
-void		pa(t_swap **head)
+void	pa(t_swap **head)
 {
 	t_list	*tmp;
 	t_list	*to;
@@ -69,4 +69,27 @@ void		pa(t_swap **head)
 	}
 	(*head)->moves += 1;
 	write(1, "pa\n", 3);
+}
+
+void	repeat_rule_push(int n, char *str, t_swap **swap)
+{
+	int	i;
+
+	i = 0;
+	if (!(ft_strncmp(str, "pa", 2)))
+	{
+		while (i < n)
+		{
+			pa(swap);
+			i++;
+		}
+	}
+	else if (!(ft_strncmp(str, "pb", 2)))
+	{
+		while (i < n)
+		{
+			pb(swap);
+			i++;
+		}
+	}
 }

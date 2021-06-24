@@ -6,18 +6,18 @@
 /*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/09 16:33:46 by cmarcu            #+#    #+#             */
-/*   Updated: 2021/06/15 16:54:16 by cmarcu           ###   ########.fr       */
+/*   Updated: 2021/06/24 14:05:48 by cmarcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/push_swap.h"
 
-// sa | sb | ss -> Intercambiar los primeros 2 elementos en la parte superior de la pila x.
-// No hace nada si sólo hay uno o ningún elementos.
+// sa | sb | ss -> Intercambiar los primeros 2 elementos en la parte
+// superior de la pila x. No hace nada si sólo hay uno o ningún elementos.
 
 int	swap_rule(t_swap *swap, t_list *stack)
 {
-	int aux;
+	int	aux;
 
 	if (stack && stack->next)
 	{
@@ -32,25 +32,25 @@ int	swap_rule(t_swap *swap, t_list *stack)
 
 void	sa(t_swap *swap)
 {
-	if(swap_rule(swap, swap->stack_a))
+	if (swap_rule(swap, swap->stack_a))
 		write(1, "sa\n", 3);
 }
 
 void	sb(t_swap *swap)
 {
-	if(swap_rule(swap, swap->stack_b))
+	if (swap_rule(swap, swap->stack_b))
 		write(1, "sb\n", 3);
 }
 
 void	ss(t_swap *swap)
 {
-	int control;
+	int	control;
 
 	control = 0;
-	if(swap_rule(swap, swap->stack_a))
+	if (swap_rule(swap, swap->stack_a))
 		control++;
-	if(swap_rule(swap, swap->stack_b))
+	if (swap_rule(swap, swap->stack_b))
 		control++;
-	if(control == 2)
+	if (control == 2)
 		write(1, "ss\n", 3);
 }

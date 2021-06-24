@@ -6,176 +6,11 @@
 /*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 12:02:00 by cmarcu            #+#    #+#             */
-/*   Updated: 2021/06/21 19:27:58 by cmarcu           ###   ########.fr       */
+/*   Updated: 2021/06/24 14:00:06 by cmarcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/push_swap.h"
-
-t_list	*ft_lstnew(int content)
-{
-	t_list	*result;
-
-	result = (t_list *)malloc(sizeof(*result));
-	if (!result)
-		return (NULL);
-	result->content = content;
-	result->next = NULL;
-	return (result);
-}
-
-t_list	*ft_lstlast(t_list *lst)
-{
-	while (lst)
-	{
-		if (!lst->next)
-			return (lst);
-		lst = lst->next;
-	}
-	return (lst);
-}
-
-void	ft_lstadd_back(t_list **lst, t_list *new)
-{
-	t_list	*last;
-
-	if (lst)
-	{
-		if (*lst)
-		{
-			last = ft_lstlast(*lst);
-			last->next = new;
-		}
-		else
-			*lst = new;
-	}
-}
-
-void	ft_lstadd_front(t_list **alst, t_list *new)
-{
-	if (alst)
-	{
-		if (*alst)
-			new->next = *alst;
-		*alst = new;
-	}
-}
-
-void	ft_lstiter(t_list *lst, void (*f)(int))
-{
-	if (!lst || !f)
-		return ;
-	while (lst)
-	{
-		(*f)(lst->content);
-		lst = lst->next;
-	}
-}
-
-void	ft_lstdelone(t_list *lst)
-{
-	if (lst)
-		free(lst);
-}
-
-int	ft_lstsize(t_list *lst)
-{
-	int	result;
-
-	result = 0;
-	while (lst)
-	{
-		lst = lst->next;
-		result++;
-	}
-	return (result);
-}
-
-void	f(int n)
-{
-	printf("%d\n", n);
-}
-
-int	ft_isspace(char *str)
-{
-	int	a;
-
-	a = 0;
-	while (str[a] == '\t' || str[a] == '\n' || str[a] == '\v'
-		|| str[a] == '\f' || str[a] == '\r' || str[a] == ' ')
-		a++;
-	return (a);
-}
-
-void print_error()
-{
-		printf("Error\n");
-		exit(1);
-}
-
-int	ft_atoi(const char *str)
-{
-	int	a;
-	long number;
-	int	is_neg;
-
-	a = ft_isspace((char *)str);
-	is_neg = 0;
-	number = 0;
-	if (str[a] == '-')
-	{
-		a++;
-		is_neg = 1;
-	}
-	else if (str[a] == '+')
-		a++;
-	while (str[a] >= '0' && str[a] <= '9')
-	{
-		number = number * 10 + (str[a] - '0');
-		a++;
-	}
-	if ((is_neg && -number < INT_MIN) || number > INT_MAX)
-		print_error();
-	if (is_neg)
-		return (-number);
-	else
-		return (number);
-}
-
-void	check_repeated(t_swap *swap, t_list *stack_a)
-{
-	t_list *ptr;
-
-	if (stack_a)
-	{
-		while (stack_a)
-		{
-			if (stack_a->content == swap->repeated)
-				print_error();
-			ptr = stack_a->next;
-			stack_a = ptr;
-		}
-	}
-}
-
-void	check_for_letters(int i, char **argv)
-{
-	int j;
-
-	j = 0;
-	while (argv[i])
-	{
-		j = 0;
-		while (argv[i][j])
-		{
-			if (!((argv[i][j] <= '9' && argv[i][j] >= '0')
-			|| (j == 0 && argv[i][j] == '-') || (j == 0 && argv[i][j] == '+')))
-				print_error();
-			j++;
-		}
-		i++;
-	}
-}
 
 void push_swap_fill(char **argv, t_swap *swap)
 {
@@ -210,27 +45,6 @@ void	push_swap_sorter(t_swap *swap)
 		swap->lst_length = ft_lstsize(swap->stack_a);
 		swap->chunk_length = swap->lst_length / number_of_chunks(swap->lst_length);
 		chunk_algorithm(swap);
-	}
-}
-
-void check_sorted(t_list *lst)
-{
-	int		n;
-	t_list	*next;
-
-	if (lst)
-	{
-		while (lst)
-		{
-			n = lst->content;
-			next = lst->next;
-			if (next)
-				if (n > next->content)
-					return ;
-			lst = next;
-		}
-		if (lst == NULL)
-			exit(1); //TODO A good exit program function
 	}
 }
 
@@ -283,68 +97,6 @@ int min_position(t_list *stack)
 		aux = aux->next;
 	}
 	return (pos);
-}
-
-int	ft_strncmp(const char *s1, const char *s2, size_t n)
-{
-	size_t	a;
-
-	a = 0;
-	while (n && s1[a] != '\0' && s1[a] == s2[a])
-	{
-		a++;
-		--n;
-	}
-	if (n == 0)
-		return (0);
-	else
-		return ((int)(unsigned char)(s1[a]) - (int)(unsigned char)(s2[a]));
-}
-
-void repeat_rule_rotate(int n, char *str, t_list **head, t_swap *swap)
-{
-	int i;
-
-	i = 0;
-	if (!(ft_strncmp(str, "rx", 2)))
-	{
-		while (i < n)
-		{
-			rx(head, swap);
-			i++;
-		}
-	}
-	else if (!(ft_strncmp(str, "rrx", 3)))
-	{
-		while (i < n)
-		{
-			rrx(head, swap);
-			i++;
-		}
-	}
-}
-
-void repeat_rule_push(int n, char *str, t_swap **swap)
-{
-	int i;
-
-	i = 0;
-	if (!(ft_strncmp(str, "pa", 2)))
-	{
-		while (i < n)
-		{
-			pa(swap);
-			i++;
-		}
-	}
-	else if (!(ft_strncmp(str, "pb", 2)))
-	{
-		while (i < n)
-		{
-			pb(swap);
-			i++;
-		}
-	}
 }
 
 void	sort_more(t_swap *swap)
@@ -443,7 +195,7 @@ int retrieve_position(t_swap *swap, int *chunk, int*stack)
 			break ;
 		}
 	}
-	// Fix return values 
+	// Fix return values
 	if (((hold_first < swap->lst_length - hold_second) && hold_second >= 0 && hold_first >= 0) || hold_second > swap->lst_length)
 		return (hold_first);
 	else

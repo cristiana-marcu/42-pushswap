@@ -6,11 +6,11 @@
 #    By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/26 11:58:16 by cmarcu            #+#    #+#              #
-#    Updated: 2021/06/09 17:08:51 by cmarcu           ###   ########.fr        #
+#    Updated: 2021/06/24 13:58:28 by cmarcu           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS = push_swap.c rule_swap.c rule_push.c rule_rotate.c
+SRCS = push_swap.c rule_swap.c rule_push.c rule_rotate.c lst_utils.c error_checking.c
 OBJS = $(SRCS:.c=.o)
 
 NAME = push_swap

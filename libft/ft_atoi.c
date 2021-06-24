@@ -6,14 +6,13 @@
 /*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/08 18:09:38 by cmarcu            #+#    #+#             */
-/*   Updated: 2021/06/01 17:27:05 by cmarcu           ###   ########.fr       */
+/*   Updated: 2021/06/24 13:51:09 by cmarcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-# include <stdio.h> // Printf, scanf
 
-static int	ft_isspace(char *str)
+int	ft_isspace(char *str)
 {
 	int	a;
 
@@ -27,7 +26,7 @@ static int	ft_isspace(char *str)
 int	ft_atoi(const char *str)
 {
 	int	a;
-	int	number;
+	long number;
 	int	is_neg;
 
 	a = ft_isspace((char *)str);
@@ -40,13 +39,13 @@ int	ft_atoi(const char *str)
 	}
 	else if (str[a] == '+')
 		a++;
-	if (str[a] == '\0' || str[a] < '0' || str[a] > '9')
-		printf("Invalid number");
 	while (str[a] >= '0' && str[a] <= '9')
 	{
 		number = number * 10 + (str[a] - '0');
 		a++;
 	}
+	if ((is_neg && -number < INT_MIN) || number > INT_MAX)
+		print_error();
 	if (is_neg)
 		return (-number);
 	else
