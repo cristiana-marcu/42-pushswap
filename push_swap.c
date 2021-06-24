@@ -6,7 +6,7 @@
 /*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 12:02:00 by cmarcu            #+#    #+#             */
-/*   Updated: 2021/06/24 17:16:38 by cmarcu           ###   ########.fr       */
+/*   Updated: 2021/06/24 17:28:20 by cmarcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -403,6 +403,6 @@ int main(int argc, char **argv)
 	push_swap_fill(argc, argv, &push_swap);
 	check_sorted(push_swap.stack_a);
 	push_swap_sorter(&push_swap);
-	printf("Number of moves: %d\n", push_swap.moves);
+	//printf("Number of moves: %d\n", push_swap.moves);
 	ft_lstiter(push_swap.stack_a, f);
 }

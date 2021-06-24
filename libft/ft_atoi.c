@@ -6,11 +6,12 @@
 /*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/08 18:09:38 by cmarcu            #+#    #+#             */
-/*   Updated: 2021/06/24 13:51:09 by cmarcu           ###   ########.fr       */
+/*   Updated: 2021/06/24 18:06:44 by cmarcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <limits.h> // Int min and max values
 
 int	ft_isspace(char *str)
 {
