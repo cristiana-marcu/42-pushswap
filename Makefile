@@ -16,8 +16,8 @@ OBJS = $(SRCS:.c=.o)
 NAME = push_swap
 
 CC = gcc
-CFLAGS = -Werror -Wextra -Wall
-LDFLAGS = -L$(LIBFTPATH) -lft
+CFLAGS = -Werror -Wextra -Wall -g3 -fsanitize=address
+LDFLAGS = -g3 -fsanitize=address -L$(LIBFTPATH) -lft
 RM = rm -f
 
 INCLUDES = ./includes/

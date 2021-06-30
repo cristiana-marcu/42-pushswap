@@ -12,101 +12,6 @@
 
 #include "includes/push_swap.h"
 
-
-size_t	ft_strlen(const char *str)
-{
-	size_t	result;
-
-	result = 0;
-	while (*str != '\0')
-	{
-		result++;
-		str++;
-	}
-	return (result);
-}
-
-
-char	*ft_substr(char const *s, unsigned int start, size_t len)
-{
-	char	*p;
-	size_t	a;
-
-	if (!s)
-		return (NULL);
-	p = (char *)malloc(sizeof(*s) * (len + 1));
-	if (!p)
-		return (NULL);
-	if ((size_t)start >= ft_strlen(s))
-		start = ft_strlen(s);
-	a = 0;
-	while (a < len && s[start] && s[a])
-	{
-		p[a] = s[start + a];
-		a++;
-	}
-	p[a] = '\0';
-	return (p);
-}
-
-static char	**ft_mountarray(char const *s, char c)
-{
-	size_t	result;
-	char	*aux;
-	char	**array;
-
-	result = 0;
-	aux = (char *)s;
-	while (*aux)
-	{
-		while (*aux == c)
-			aux++;
-		if (*aux != '\0')
-			result++;
-		while (*aux && *aux != c)
-			aux++;
-	}
-	array = (char **)malloc((result + 1) * sizeof(char *));
-	if (!array)
-		return (NULL);
-	return (array);
-}
-
-static char	**ft_fill_array(char const *s, char **array, char c)
-{
-	size_t	i;
-	size_t	j;
-
-	i = 0;
-	j = 0;
-	while (*s)
-	{
-		while (*s == c)
-			s++;
-		if (*s != '\0')
-		{
-			while (s[j] && s[j] != c)
-				j++;
-			array[i++] = ft_substr(s, 0, j);
-			s = s + j;
-		}
-		j = 0;
-	}
-	array[i] = NULL;
-	return (array);
-}
-
-char	**ft_split(char const *s, char c)
-{
-	char	**array;
-	if (!s)
-		return (NULL);
-	array = ft_mountarray(s, c);
-	if (!array)
-		return (NULL);
-	return (ft_fill_array(s, array, c));
-}
-
 void push_swap_fill(int argc, char **argv, t_swap *swap)
 {
 	int		i;
@@ -161,19 +66,19 @@ void	sort_three(t_swap *swap)
 	if (n1 > n2 && n1 > n3 && n2 > n3) // 3 2 1
 	{
 		sa(swap);
-		rrx(&swap->stack_a, swap);
+		rrx(&swap->stack_a, swap, "rra");
 	}
 	else if (n1 < n2 && n1 < n3 && n2 > n3) // 1 3 2
 	{
 		sa(swap);
-		rx(&swap->stack_a, swap);
+		rx(&swap->stack_a, swap, "ra");
 	}
 	else if (n1 > n2 && n1 < n3 && n2 < n3) // 2 1 3
 		sa(swap);
 	else if (n1 < n2 && n1 > n3 && n2 > n3) // 2 3 1
-		rrx(&swap->stack_a, swap);
+		rrx(&swap->stack_a, swap, "rra");
 	else if (n1 > n2 && n1 > n3 && n2 < n3) // 3 1 2
-		rx(&swap->stack_a, swap);
+		rx(&swap->stack_a, swap, "ra");
 }
 
 int min_position(t_list *stack)
@@ -214,9 +119,9 @@ void	sort_more(t_swap *swap)
 		pos = min_position(aux);
 		length = ft_lstsize(swap->stack_a);
 		if (pos <= length / 2)
-			repeat_rule_rotate(pos, "rx", &aux, swap);
+			repeat_rule_rotate(pos, "ra", &aux, swap);
 		else if (pos > length / 2)
-			repeat_rule_rotate(length - pos, "rrx", &aux, swap);
+			repeat_rule_rotate(length - pos, "rra", &aux, swap);
 		swap->stack_a = aux;
 		pb(&swap);
 		aux = swap->stack_a;
@@ -306,9 +211,9 @@ int retrieve_position(t_swap *swap, int *chunk, int*stack)
 void get_to_top(int pos, t_swap *swap)
 {
 	if (pos <= swap->lst_length / 2)
-		repeat_rule_rotate(pos, "rx", &swap->stack_a, swap);
+		repeat_rule_rotate(pos, "ra", &swap->stack_a, swap);
 	else if (pos > swap->lst_length / 2)
-		repeat_rule_rotate(swap->lst_length - pos + 1, "rrx", &swap->stack_a, swap);
+		repeat_rule_rotate(swap->lst_length - pos + 1, "rra", &swap->stack_a, swap);
 }
 
 void get_to_top_b(int pos, t_swap *swap)
@@ -317,9 +222,9 @@ void get_to_top_b(int pos, t_swap *swap)
 
 	b_length = ft_lstsize(swap->stack_b);
 	if (pos <= b_length / 2)
-		repeat_rule_rotate(pos, "rx", &swap->stack_b, swap);
+		repeat_rule_rotate(pos, "rb", &swap->stack_b, swap);
 	else if (pos > b_length / 2)
-		repeat_rule_rotate(b_length - pos, "rrx", &swap->stack_b, swap);
+		repeat_rule_rotate(b_length - pos, "rrb", &swap->stack_b, swap);
 }
 
 int max_position(t_list *stack)
@@ -391,6 +296,8 @@ void chunk_algorithm(t_swap *swap)
 		free(chunk);
 		j++;
 	}
+	printf("Tamaño stack_a: %d\n", ft_lstsize(swap->stack_a));
+	//printf("Stack_a: %d\n", swap->stack_a->content);
 	push_back(swap);
 }
 
@@ -403,6 +310,8 @@ int main(int argc, char **argv)
 	push_swap_fill(argc, argv, &push_swap);
 	check_sorted(push_swap.stack_a);
 	push_swap_sorter(&push_swap);
+	printf("Number of moves: %d\n", push_swap.moves);
+	//ft_lstiter(push_swap.stack_a, f);
 	//printf("Number of moves: %d\n", push_swap.moves);
 	ft_lstiter(push_swap.stack_a, f);
 }

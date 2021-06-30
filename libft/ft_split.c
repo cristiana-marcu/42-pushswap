@@ -30,7 +30,6 @@ static char	**ft_mountarray(char const *s, char c)
 		while (*aux && *aux != c)
 			aux++;
 	}
-	printf("mounting array");
 	array = (char **)malloc((result + 1) * sizeof(char *));
 	if (!array)
 		return (NULL);
@@ -64,11 +63,9 @@ static char	**ft_fill_array(char const *s, char **array, char c)
 char	**ft_split(char const *s, char c)
 {
 	char	**array;
-	printf("mounting array");
 	if (!s)
 		return (NULL);
 	array = ft_mountarray(s, c);
-	printf("i'm not even here");
 	if (!array)
 		return (NULL);
 	return (ft_fill_array(s, array, c));

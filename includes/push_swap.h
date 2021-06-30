@@ -58,8 +58,8 @@ void	sb(t_swap *swap);
 void	ss(t_swap *swap);
 void	pa(t_swap **swap);
 void	pb(t_swap **swap);
-void rx(t_list **head, t_swap *swap);
-void rrx(t_list **head, t_swap *swap);
+int rx(t_list **head, t_swap *swap, char *str);
+int	rrx(t_list **head, t_swap *swap, char *str);
 void rrr(t_list **head_a, t_list **head_b, t_swap *swap);
 
 void check_sorted(t_list *lst);
