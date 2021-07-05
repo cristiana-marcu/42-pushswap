@@ -6,7 +6,7 @@
 #    By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/26 11:58:16 by cmarcu            #+#    #+#              #
-#    Updated: 2021/07/05 17:37:28 by cmarcu           ###   ########.fr        #
+#    Updated: 2021/07/05 18:12:34 by cmarcu           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,7 +59,7 @@ check_bonus: $(NAME) bonus
 	./push_swap $(ARG) | ./checker $(ARG)
 
 clean:
-	$(RM) $(OBJS)
+	$(RM) $(OBJS) $(OBJS_BONUS)
 
 fclean: clean
 	$(RM) $(NAME)
