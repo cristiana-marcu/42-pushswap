@@ -6,7 +6,7 @@
 /*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 12:02:39 by cmarcu            #+#    #+#             */
-/*   Updated: 2021/06/24 17:09:44 by cmarcu           ###   ########.fr       */
+/*   Updated: 2021/07/05 17:09:28 by cmarcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ char	**ft_split(char const *s, char c);
 void push_swap_fill(int argc, char **argv, t_swap *swap);
 void	check_for_letters(int i, char **argv);
 void	check_repeated(t_swap *swap, t_list *stack_a);
+void	free_split(char **temp);
 
 void	ft_lstdelone(t_list *lst);
 void	ft_lstiter(t_list *lst, void (*f)(int));
@@ -84,5 +85,15 @@ int retrieve_position(t_swap *swap, int *chunk, int*stack);
 
 void print_error(void);
 void	f(int n);
+
+int		get_next_line(int fd, char **line);
+int		mount_next_line(int re, char **re_acu, char **line);
+int		delmem(char **p);
+void	ft_bzero(char *s, size_t n);
+char	*ft_strdup(const char *s1);
+char	*ft_substr(char const *s, unsigned int start, size_t len);
+char	*ft_strjoin(char const *s1, char const *s2);
+char	*ft_strchr(const char *s, int c);
+size_t	ft_strlen(const char *str);
 
 #endif

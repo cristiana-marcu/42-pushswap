@@ -6,12 +6,19 @@
 #    By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/26 11:58:16 by cmarcu            #+#    #+#              #
-#    Updated: 2021/06/24 17:24:55 by cmarcu           ###   ########.fr        #
+#    Updated: 2021/07/05 17:37:28 by cmarcu           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS = push_swap.c rule_swap.c rule_push.c rule_rotate.c lst_utils.c error_checking.c
+SRCS = push_swap.c rule_swap.c rule_push.c rule_rotate.c lst_utils.c \
+		error_checking.c sorter.c chunker.c
+
+SRCS_BONUS = rule_swap.c rule_push.c rule_rotate.c lst_utils.c \
+		error_checking.c get_next_line.c checker.c
+
 OBJS = $(SRCS:.c=.o)
+
+OBJS_BONUS = $(SRCS_BONUS:.c=.o)
 
 NAME = push_swap
 
@@ -34,13 +41,22 @@ $(NAME): $(OBJS) $(LIBFT)
 $(LIBFT):
 	make re -C $(LIBFTPATH)
 
-ARG :=	$(shell seq 0 100 | sort -R)
+bonus: $(OBJS_BONUS)
+	@$(CC) $(LDFLAGS) $(OBJS_BONUS) -I $(INCLUDES) -o checker
+
+ARG :=	$(shell seq 0 500 | sort -R)
 
 exe: $(NAME)
 	./push_swap $(ARG)
 
 check: $(NAME)
 	./push_swap $(ARG) | ./checker_Mac $(ARG)
+
+check_bonus: $(NAME) bonus
+	@echo Official checker
+	./push_swap $(ARG) | ./checker_Mac $(ARG)
+	@echo My checker
+	./push_swap $(ARG) | ./checker $(ARG)
 
 clean:
 	$(RM) $(OBJS)
