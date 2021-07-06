@@ -6,7 +6,7 @@
 /*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/10 18:13:16 by cmarcu            #+#    #+#             */
-/*   Updated: 2021/07/06 17:35:54 by cmarcu           ###   ########.fr       */
+/*   Updated: 2021/07/06 18:03:33 by cmarcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ void	repeat_rule_rotate(int n, char *str, t_list **head, t_swap *swap)
 	i = -1;
 	if (!(ft_strncmp(str, "ra", 2)))
 	{
-		head = &swap->stack_a;
+		//head = &swap->stack_a;
 		while (++i < n)
 			do_rule(swap, "ra");
 			//rx(head, swap);

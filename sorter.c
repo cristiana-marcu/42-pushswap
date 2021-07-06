@@ -6,7 +6,7 @@
 /*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/05 17:12:54 by cmarcu            #+#    #+#             */
-/*   Updated: 2021/07/06 16:49:19 by cmarcu           ###   ########.fr       */
+/*   Updated: 2021/07/06 18:07:18 by cmarcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,8 @@ void	sort_more(t_swap *swap)
 		else if (pos > length / 2)
 			repeat_rule_rotate(length - pos, "rra", &aux, swap);
 		swap->stack_a = aux;
-		pb(&swap);
+		do_rule(swap, "pb");
+		//pb(&swap);
 		aux = swap->stack_a;
 	}
 	sort_three(swap);

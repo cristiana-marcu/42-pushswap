@@ -6,7 +6,7 @@
 /*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/09 16:33:46 by cmarcu            #+#    #+#             */
-/*   Updated: 2021/07/06 15:13:00 by cmarcu           ###   ########.fr       */
+/*   Updated: 2021/07/06 18:07:08 by cmarcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ int	sa(t_swap *swap)
 {
 	if (swap_rule(swap, swap->stack_a))
 		return (1);
-		//write(1, "sa\n", 3);
 	return (0);
 }
 
@@ -42,7 +41,6 @@ int	sb(t_swap *swap)
 {
 	if (swap_rule(swap, swap->stack_b))
 		return (1);
-		//write(1, "sb\n", 3);
 	return (0);
 }
 
