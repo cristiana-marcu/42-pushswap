@@ -6,7 +6,7 @@
 /*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 12:02:39 by cmarcu            #+#    #+#             */
-/*   Updated: 2021/07/05 17:09:28 by cmarcu           ###   ########.fr       */
+/*   Updated: 2021/07/06 16:49:30 by cmarcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,14 +54,15 @@ t_list	*ft_lstnew(int content);
 int	ft_lstsize(t_list *lst);
 
 int	swap_rule(t_swap *swap, t_list *stack);
-void	sa(t_swap *swap);
-void	sb(t_swap *swap);
-void	ss(t_swap *swap);
-void	pa(t_swap **swap);
-void	pb(t_swap **swap);
-int rx(t_list **head, t_swap *swap, char *str);
-int	rrx(t_list **head, t_swap *swap, char *str);
-void rrr(t_list **head_a, t_list **head_b, t_swap *swap);
+int	sa(t_swap *swap);
+int	sb(t_swap *swap);
+int	ss(t_swap *swap);
+int	pa(t_swap **swap);
+int	pb(t_swap **swap);
+int rx(t_list **head, t_swap *swap);
+int	rr(t_list **head_a, t_list **head_b, t_swap *swap);
+int	rrx(t_list **head, t_swap *swap);
+int rrr(t_list **head_a, t_list **head_b, t_swap *swap);
 
 void check_sorted(t_list *lst);
 
@@ -86,7 +87,7 @@ int retrieve_position(t_swap *swap, int *chunk, int*stack);
 void print_error(void);
 void	f(int n);
 
-int		get_next_line(int fd, char **line);
+/*int		get_next_line(int fd, char **line);
 int		mount_next_line(int re, char **re_acu, char **line);
 int		delmem(char **p);
 void	ft_bzero(char *s, size_t n);
@@ -94,6 +95,9 @@ char	*ft_strdup(const char *s1);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_strchr(const char *s, int c);
-size_t	ft_strlen(const char *str);
+size_t	ft_strlen(const char *str);*/
+
+void	print_rule(char *rule);
+void	do_rule(t_swap *swap, char *rule);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/24 13:55:52 by cmarcu            #+#    #+#             */
-/*   Updated: 2021/06/24 16:22:18 by cmarcu           ###   ########.fr       */
+/*   Updated: 2021/07/06 12:55:48 by cmarcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,6 @@ void	check_sorted(t_list *lst)
 			lst = next;
 		}
 		if (lst == NULL)
-			exit(1); //TODO A good exit program function
+			exit(1);
 	}
 }

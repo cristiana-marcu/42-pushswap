@@ -6,15 +6,15 @@
 #    By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/26 11:58:16 by cmarcu            #+#    #+#              #
-#    Updated: 2021/07/05 18:12:34 by cmarcu           ###   ########.fr        #
+#    Updated: 2021/07/06 13:55:59 by cmarcu           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRCS = push_swap.c rule_swap.c rule_push.c rule_rotate.c lst_utils.c \
-		error_checking.c sorter.c chunker.c
+		error_checking.c sorter.c chunker.c ruler.c
 
 SRCS_BONUS = rule_swap.c rule_push.c rule_rotate.c lst_utils.c \
-		error_checking.c get_next_line.c checker.c
+		error_checking.c get_next_line.c checker.c ruler.c
 
 OBJS = $(SRCS:.c=.o)
 

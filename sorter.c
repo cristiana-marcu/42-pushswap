@@ -6,7 +6,7 @@
 /*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/05 17:12:54 by cmarcu            #+#    #+#             */
-/*   Updated: 2021/07/05 17:20:06 by cmarcu           ###   ########.fr       */
+/*   Updated: 2021/07/06 16:49:19 by cmarcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	push_swap_sorter(t_swap *swap)
 {
 	if (swap->lst_length == 2)
-		sa(swap);
+		do_rule(swap, "sa");
 	else if (swap->lst_length == 3)
 		sort_three(swap);
 	else if (swap->lst_length <= 50)
@@ -39,20 +39,20 @@ void	sort_three(t_swap *swap)
 	n3 = swap->stack_a->next->next->content;
 	if (n1 > n2 && n1 > n3 && n2 > n3) // 3 2 1
 	{
-		sa(swap);
-		rrx(&swap->stack_a, swap, "rra");
+		do_rule(swap, "sa");
+		do_rule(swap, "rra");
 	}
 	else if (n1 < n2 && n1 < n3 && n2 > n3) // 1 3 2
 	{
-		sa(swap);
-		rx(&swap->stack_a, swap, "ra");
+		do_rule(swap, "sa");
+		do_rule(swap, "ra");
 	}
 	else if (n1 > n2 && n1 < n3 && n2 < n3) // 2 1 3
-		sa(swap);
+		do_rule(swap, "sa");
 	else if (n1 < n2 && n1 > n3 && n2 > n3) // 2 3 1
-		rrx(&swap->stack_a, swap, "rra");
+		do_rule(swap, "rra");
 	else if (n1 > n2 && n1 > n3 && n2 < n3) // 3 1 2
-		rx(&swap->stack_a, swap, "ra");
+		do_rule(swap, "ra");
 }
 
 int min_position(t_list *stack)

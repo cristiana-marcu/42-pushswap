@@ -6,7 +6,7 @@
 /*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/09 17:15:55 by cmarcu            #+#    #+#             */
-/*   Updated: 2021/06/24 14:04:51 by cmarcu           ###   ########.fr       */
+/*   Updated: 2021/07/06 15:12:38 by cmarcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 // pa | pb | pp -> Toma el primer elemento en la parte superior de a ó b
 // y ponerlo en la parte superior de a ó b. No hace nada si a ó b está vacío.
 
-void	pb(t_swap **head)
+int	pb(t_swap **head)
 {
 	t_list	*tmp;
 	t_list	*to;
@@ -24,7 +24,7 @@ void	pb(t_swap **head)
 	to = (*head)->stack_b;
 	from = (*head)->stack_a;
 	if (!from)
-		return ;
+		return (0);
 	tmp = from;
 	from = from->next;
 	(*head)->stack_a = from;
@@ -40,10 +40,11 @@ void	pb(t_swap **head)
 		(*head)->stack_b = tmp;
 	}
 	(*head)->moves += 1;
-	write(1, "pb\n", 3);
+	return (1);
+	//write(1, "pb\n", 3);
 }
 
-void	pa(t_swap **head)
+int	pa(t_swap **head)
 {
 	t_list	*tmp;
 	t_list	*to;
@@ -52,7 +53,7 @@ void	pa(t_swap **head)
 	to = (*head)->stack_a;
 	from = (*head)->stack_b;
 	if (!from)
-		return ;
+		return (0);
 	tmp = from;
 	from = from->next;
 	(*head)->stack_b = from;
@@ -68,7 +69,8 @@ void	pa(t_swap **head)
 		(*head)->stack_a = tmp;
 	}
 	(*head)->moves += 1;
-	write(1, "pa\n", 3);
+	return (1);
+	//write(1, "pa\n", 3);
 }
 
 void	repeat_rule_push(int n, char *str, t_swap **swap)

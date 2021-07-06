@@ -6,7 +6,7 @@
 /*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/05 15:26:27 by cmarcu            #+#    #+#             */
-/*   Updated: 2021/07/05 18:27:52 by cmarcu           ###   ########.fr       */
+/*   Updated: 2021/07/06 13:56:40 by cmarcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,11 +61,11 @@ void	push_swap_checker(t_swap *swap)
 	while (get_next_line(0, &line) > 0)
 	{
 		if (!(ft_strncmp("sa", line, 2)))
-			sa(swap);
+			do_rule(swap, "sa");
 		else if (!(ft_strncmp("sb", line, 2)))
 			sb(swap);
-		//else if (ft_strncmp("ra", line, 2))
-			//rx(swap, swap, "ra");
+		else if (ft_strncmp("ss", line, 2))
+			ss(swap);
 	}
 }
 

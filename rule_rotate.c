@@ -6,13 +6,13 @@
 /*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/10 18:13:16 by cmarcu            #+#    #+#             */
-/*   Updated: 2021/06/24 14:06:54 by cmarcu           ###   ########.fr       */
+/*   Updated: 2021/07/06 16:49:46 by cmarcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/push_swap.h"
 
-int	rx(t_list **head, t_swap *swap, char *str)
+int	rx(t_list **head, t_swap *swap)
 {
 	t_list	*aux;
 	t_list	*first;
@@ -30,20 +30,22 @@ int	rx(t_list **head, t_swap *swap, char *str)
 	first->next = NULL;
 	*head = aux;
 	swap->moves += 1;
-	if (!(ft_strncmp(str, "ra", 2)))
-		write(1, "ra\n", 3);
-	else if (!(ft_strncmp(str, "rb", 2)))
-		write(1, "rb\n", 3);
 	return (1);
 }
 
-void	rr(t_list **head_a, t_list **head_b, t_swap *swap)
+int	rr(t_list **head_a, t_list **head_b, t_swap *swap)
 {
-	rx(head_a, swap, "ra");
-	rx(head_b, swap, "rb");
+	int	control;
+
+	control = 0;
+	control = rx(head_a, swap);
+	control += rx(head_b, swap);
+	if (control == 2)
+		return (1);
+	return (0);
 }
 
-int	rrx(t_list **head, t_swap *swap, char *str)
+int	rrx(t_list **head, t_swap *swap)
 {
 	t_list	*aux;
 	t_list	*previous;
@@ -62,54 +64,50 @@ int	rrx(t_list **head, t_swap *swap, char *str)
 	previous->next = NULL;
 	*head = last;
 	swap->moves += 1;
-	if (!(ft_strncmp(str, "rra", 3)))
-		write(1, "rra\n", 4);
-	else if (!(ft_strncmp(str, "rrb", 3)))
-		write(1, "rrb\n", 4);
 	return (1);
 }
 
-void	rrr(t_list **head_a, t_list **head_b, t_swap *swap)
+int	rrr(t_list **head_a, t_list **head_b, t_swap *swap)
 {
-	rrx(head_a, swap, "rra");
-	rrx(head_b, swap, "rrb");
+	int	control;
+
+	control = 0;
+	if (rrx(head_a, swap))
+		control++;
+	if (rrx(head_b, swap))
+		control++;
+	if (control == 2)
+		return (1);
+	return (0);
 }
 
 void	repeat_rule_rotate(int n, char *str, t_list **head, t_swap *swap)
 {
 	int	i;
 
-	i = 0;
+	i = -1;
 	if (!(ft_strncmp(str, "ra", 2)))
 	{
-		while (i < n)
-		{
-			rx(head, swap, "ra");
-			i++;
-		}
+		while (++i < n)
+			do_rule(swap, "ra");
+			//rx(head, swap);
 	}
 	else if (!(ft_strncmp(str, "rra", 3)))
 	{
-		while (i < n)
-		{
-			rrx(head, swap, "rra");
-			i++;
-		}
+		while (++i < n)
+			do_rule(swap, "rra");
+			//rrx(head, swap);
 	}
 	else if (!(ft_strncmp(str, "rb", 2)))
 	{
-		while (i < n)
-		{
-			rx(head, swap, "rb");
-			i++;
-		}
+		while (++i < n)
+			do_rule(swap, "rb");
+			//rx(head, swap);
 	}
 	else if (!(ft_strncmp(str, "rrb", 3)))
 	{
-		while (i < n)
-		{
-			rrx(head, swap, "rrb");
-			i++;
-		}
+		while (++i < n)
+			do_rule(swap, "rrb");
+			//rrx(head, swap);
 	}
 }
