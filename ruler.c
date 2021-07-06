@@ -6,7 +6,7 @@
 /*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 13:49:33 by cmarcu            #+#    #+#             */
-/*   Updated: 2021/07/06 16:50:46 by cmarcu           ###   ########.fr       */
+/*   Updated: 2021/07/06 17:38:22 by cmarcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,14 @@ void	print_rule(char *rule)
 		write(1, "ra\n", 3);
 	else if (!(ft_strncmp(rule, "rb", 2)))
 		write(1, "rb\n", 3);
-	else if (!(ft_strncmp(rule, "rr", 2)))
-		write(1, "rr\n", 3);
 	else if (!(ft_strncmp(rule, "rra", 3)))
 		write(1, "rra\n", 4);
 	else if (!(ft_strncmp(rule, "rrb", 3)))
 		write(1, "rrb\n", 4);
 	else if (!(ft_strncmp(rule, "rrr", 3)))
 		write(1, "rrr\n", 4);
+	else if (!(ft_strncmp(rule, "rr", 2)))
+		write(1, "rr\n", 3);
 	else
 		print_error();
 }
@@ -45,7 +45,6 @@ void	do_rule(t_swap *swap, char *rule)
 	int	control;
 
 	control = 0;
-	//printf("rule %s\n", rule);
 	if (!(ft_strncmp(rule, "sa", 2)))
 		control = sa(swap);
 	else if (!(ft_strncmp(rule, "sb", 2)))
@@ -60,15 +59,14 @@ void	do_rule(t_swap *swap, char *rule)
 		control = rx(&swap->stack_a, swap);
 	else if (!(ft_strncmp(rule, "rb", 2)))
 		control = rx(&swap->stack_b, swap);
-	else if (!(ft_strncmp(rule, "rr", 3)))
-		control = rr(&swap->stack_a, &swap->stack_b, swap);
 	else if (!(ft_strncmp(rule, "rra", 3)))
 		control = rrx(&swap->stack_a, swap);
 	else if (!(ft_strncmp(rule, "rrb", 3)))
 		control = rrx(&swap->stack_b, swap);
 	else if (!(ft_strncmp(rule, "rrr", 3)))
 		control = rrr(&swap->stack_a, &swap->stack_b, swap);
-	//printf("control %d\n", control);
+	else if (!(ft_strncmp(rule, "rr", 2)))
+		control = rr(&swap->stack_a, &swap->stack_b, swap);
 	if (control)
 		print_rule(rule);
 }

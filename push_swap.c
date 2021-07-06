@@ -6,7 +6,7 @@
 /*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 12:02:00 by cmarcu            #+#    #+#             */
-/*   Updated: 2021/07/06 16:46:55 by cmarcu           ###   ########.fr       */
+/*   Updated: 2021/07/06 17:59:45 by cmarcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,8 @@ void push_back(t_swap *swap)
 	{
 		position = max_position(swap->stack_b);
 		get_to_top_b(position, swap);
-		pa(&swap);
+		do_rule(swap, "pa");
+		//pa(&swap);
 		i++;
 	}
 }
@@ -115,7 +116,8 @@ void chunk_algorithm(t_swap *swap)
 			copy_stack_to_array(swap->stack_a, stack_copy);
 			position = retrieve_position(swap, chunk, stack_copy);
 			get_to_top(position, swap);
-			pb(&swap);
+			do_rule(swap, "pb");
+			//pb(&swap);
 			i++;
 		}
 		free(stack_copy);

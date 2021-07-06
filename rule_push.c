@@ -6,7 +6,7 @@
 /*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/09 17:15:55 by cmarcu            #+#    #+#             */
-/*   Updated: 2021/07/06 15:12:38 by cmarcu           ###   ########.fr       */
+/*   Updated: 2021/07/06 17:57:36 by cmarcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ int	pb(t_swap **head)
 	}
 	(*head)->moves += 1;
 	return (1);
-	//write(1, "pb\n", 3);
 }
 
 int	pa(t_swap **head)
@@ -70,7 +69,6 @@ int	pa(t_swap **head)
 	}
 	(*head)->moves += 1;
 	return (1);
-	//write(1, "pa\n", 3);
 }
 
 void	repeat_rule_push(int n, char *str, t_swap **swap)
