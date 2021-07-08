@@ -117,7 +117,6 @@ void chunk_algorithm(t_swap *swap)
 			position = retrieve_position(swap, chunk, stack_copy);
 			get_to_top(position, swap);
 			do_rule(swap, "pb");
-			//pb(&swap);
 			i++;
 		}
 		free(stack_copy);

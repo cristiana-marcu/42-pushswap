@@ -44,7 +44,7 @@ $(LIBFT):
 bonus: $(OBJS_BONUS)
 	@$(CC) $(LDFLAGS) $(OBJS_BONUS) -I $(INCLUDES) -o checker
 
-ARG :=	$(shell seq 0 500 | sort -R)
+ARG :=	$(shell seq 0 50 | sort -R)
 
 exe: $(NAME)
 	./push_swap $(ARG)
