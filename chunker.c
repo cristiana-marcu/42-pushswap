@@ -93,9 +93,9 @@ int retrieve_position(t_swap *swap, int *chunk, int*stack)
 void get_to_top(int pos, t_swap *swap)
 {
 	if (pos <= swap->lst_length / 2)
-		repeat_rule_rotate(pos, "ra", &swap->stack_a, swap);
+		repeat_rule_rotate(pos, "ra", swap);
 	else if (pos > swap->lst_length / 2)
-		repeat_rule_rotate(swap->lst_length - pos + 1, "rra", &swap->stack_a, swap);
+		repeat_rule_rotate(swap->lst_length - pos + 1, "rra", swap);
 }
 
 void get_to_top_b(int pos, t_swap *swap)
@@ -104,7 +104,7 @@ void get_to_top_b(int pos, t_swap *swap)
 
 	b_length = ft_lstsize(swap->stack_b);
 	if (pos <= b_length / 2)
-		repeat_rule_rotate(pos, "rb", &swap->stack_b, swap);
+		repeat_rule_rotate(pos, "rb", swap);
 	else if (pos > b_length / 2)
-		repeat_rule_rotate(b_length - pos, "rrb", &swap->stack_b, swap);
+		repeat_rule_rotate(b_length - pos, "rrb", swap);
 }

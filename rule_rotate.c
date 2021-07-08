@@ -81,34 +81,30 @@ int	rrr(t_list **head_a, t_list **head_b, t_swap *swap)
 	return (0);
 }
 
-void	repeat_rule_rotate(int n, char *str, t_list **head, t_swap *swap)
+void	repeat_rule_rotate(int n, char *str, t_swap *swap)
 {
 	int	i;
 
 	i = -1;
 	if (!(ft_strncmp(str, "ra", 2)))
 	{
-		head = &swap->stack_a;
+		//head = &swap->stack_a;
 		while (++i < n)
 			do_rule(swap, "ra");
-			//rx(head, swap);
 	}
 	else if (!(ft_strncmp(str, "rra", 3)))
 	{
 		while (++i < n)
 			do_rule(swap, "rra");
-			//rrx(head, swap);
 	}
 	else if (!(ft_strncmp(str, "rb", 2)))
 	{
 		while (++i < n)
 			do_rule(swap, "rb");
-			//rx(head, swap);
 	}
 	else if (!(ft_strncmp(str, "rrb", 3)))
 	{
 		while (++i < n)
 			do_rule(swap, "rrb");
-			//rrx(head, swap);
 	}
 }

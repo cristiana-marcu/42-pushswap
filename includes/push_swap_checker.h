@@ -70,7 +70,7 @@ void	sort_three(t_swap *swap);
 
 void	sort_more(t_swap *swap);
 void repeat_rule_push(int n, char *str, t_swap **swap);
-void repeat_rule_rotate(int n, char *str, t_list **head, t_swap *swap);
+void repeat_rule_rotate(int n, char *str, t_swap *swap);
 int min_position(t_list *stack);
 
 void chunk_algorithm(t_swap *swap);

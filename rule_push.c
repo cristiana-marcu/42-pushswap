@@ -80,7 +80,7 @@ void	repeat_rule_push(int n, char *str, t_swap **swap)
 	{
 		while (i < n)
 		{
-			pa(swap);
+			do_rule(*swap, "pa");
 			i++;
 		}
 	}
@@ -88,7 +88,7 @@ void	repeat_rule_push(int n, char *str, t_swap **swap)
 	{
 		while (i < n)
 		{
-			pb(swap);
+			do_rule(*swap, "pa");
 			i++;
 		}
 	}

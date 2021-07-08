@@ -86,8 +86,9 @@ void	push_swap_checker(t_swap *swap)
 		free(line);
 	}
 	n = check_sorted(swap->stack_a);
+	//printf("Sorted: %d\n", n);
 	if (n && !swap->stack_b)
-			write(1, "OK\n", 3);
+		write(1, "OK\n", 3);
 	else
 		write(1, "KO\n", 3);
 }
@@ -104,6 +105,6 @@ int main(int argc, char **argv)
 	//printf("Number of moves: %d\n", push_swap.moves);
 	//ft_lstiter(push_swap.stack_a, f);
 	//printf("Number of moves: %d\n", push_swap.moves);
-	//ft_lstiter(push_swap.stack_a, f);
+	//ft_lstiter(push_swap.stack_b, f);
 	//system("leaks push_swap");
 }

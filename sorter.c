@@ -63,7 +63,8 @@ int min_position(t_list *stack)
 	int i;
 
 	aux = stack;
-	min = aux->content;
+	if (aux)
+		min = aux->content;
 	pos = 0;
 	i = 0;
 	while (aux)
@@ -93,12 +94,11 @@ void	sort_more(t_swap *swap)
 		pos = min_position(aux);
 		length = ft_lstsize(swap->stack_a);
 		if (pos <= length / 2)
-			repeat_rule_rotate(pos, "ra", &aux, swap);
+			repeat_rule_rotate(pos, "ra", swap);
 		else if (pos > length / 2)
-			repeat_rule_rotate(length - pos, "rra", &aux, swap);
-		swap->stack_a = aux;
+			repeat_rule_rotate(length - pos, "rra", swap);
+		//swap->stack_a = aux;
 		do_rule(swap, "pb");
-		//pb(&swap);
 		aux = swap->stack_a;
 	}
 	sort_three(swap);

@@ -90,7 +90,6 @@ void push_back(t_swap *swap)
 		position = max_position(swap->stack_b);
 		get_to_top_b(position, swap);
 		do_rule(swap, "pa");
-		//pa(&swap);
 		i++;
 	}
 }
@@ -141,5 +140,6 @@ int main(int argc, char **argv)
 	//ft_lstiter(push_swap.stack_a, f);
 	//printf("Number of moves: %d\n", push_swap.moves);
 	//ft_lstiter(push_swap.stack_a, f);
+	//ft_lstiter(push_swap.stack_b, f);
 	//system("leaks push_swap");
 }
