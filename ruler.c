@@ -70,3 +70,32 @@ void	do_rule(t_swap *swap, char *rule)
 	if (control)
 		print_rule(rule);
 }
+
+void	do_rule_no_printing(t_swap *swap, char *rule)
+{
+	int	control;
+
+	control = 0;
+	if (!(ft_strncmp(rule, "sa", 2)))
+		control = sa(swap);
+	else if (!(ft_strncmp(rule, "sb", 2)))
+		control = sb(swap);
+	else if (!(ft_strncmp(rule, "ss", 2)))
+		control = ss(swap);
+	else if (!(ft_strncmp(rule, "pb", 2)))
+		control = pb(&swap);
+	else if (!(ft_strncmp(rule, "pa", 2)))
+		control = pa(&swap);
+	else if (!(ft_strncmp(rule, "ra", 2)))
+		control = rx(&swap->stack_a, swap);
+	else if (!(ft_strncmp(rule, "rb", 2)))
+		control = rx(&swap->stack_b, swap);
+	else if (!(ft_strncmp(rule, "rra", 3)))
+		control = rrx(&swap->stack_a, swap);
+	else if (!(ft_strncmp(rule, "rrb", 3)))
+		control = rrx(&swap->stack_b, swap);
+	else if (!(ft_strncmp(rule, "rrr", 3)))
+		control = rrr(&swap->stack_a, &swap->stack_b, swap);
+	else if (!(ft_strncmp(rule, "rr", 2)))
+		control = rr(&swap->stack_a, &swap->stack_b, swap);
+}

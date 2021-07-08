@@ -55,18 +55,43 @@ void push_swap_fill(int argc, char **argv, t_swap *swap)
 
 void	push_swap_checker(t_swap *swap)
 {
-	//int		n;
+	int		n;
 	char	*line;
-
+	printf("im not even here\n");
 	while (get_next_line(0, &line) > 0)
 	{
 		if (!(ft_strncmp("sa", line, 2)))
-			do_rule(swap, "sa");
+			do_rule_no_printing(swap, "sa");
 		else if (!(ft_strncmp("sb", line, 2)))
-			sb(swap);
+			do_rule_no_printing(swap, "sb");
 		else if (ft_strncmp("ss", line, 2))
-			ss(swap);
+			do_rule_no_printing(swap, "ss");
+		else if (ft_strncmp("pb", line, 2))
+			do_rule_no_printing(swap, "pb");
+		else if (ft_strncmp("pa", line, 2))
+			do_rule_no_printing(swap, "pa");
+		else if (ft_strncmp("ra", line, 2))
+			do_rule_no_printing(swap, "ra");
+		else if (ft_strncmp("rb", line, 2))
+			do_rule_no_printing(swap, "rb");
+		else if (ft_strncmp("rra", line, 3))
+			do_rule_no_printing(swap, "rra");
+		else if (ft_strncmp("rrb", line, 3))
+			do_rule_no_printing(swap, "rrb");
+		else if (ft_strncmp("rrr", line, 3))
+			do_rule_no_printing(swap, "rrr");
+		else if (ft_strncmp("rr", line, 2))
+			do_rule_no_printing(swap, "rr");
+		else
+			print_error();
+		printf("Line %s\n", line);
 	}
+	ft_lstiter(swap->stack_a, f);
+	n = check_sorted(swap->stack_a);
+	if (n && !swap->stack_b)
+			write(1, "OK\n", 3);
+	else
+		write(1, "KO\n", 3);
 }
 
 int main(int argc, char **argv)

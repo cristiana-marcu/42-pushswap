@@ -58,7 +58,7 @@ void	check_for_letters(int i, char **argv)
 	}
 }
 
-void	check_sorted(t_list *lst)
+int	check_sorted(t_list *lst)
 {
 	int		n;
 	t_list	*next;
@@ -71,10 +71,12 @@ void	check_sorted(t_list *lst)
 			next = lst->next;
 			if (next)
 				if (n > next->content)
-					return ;
+					return (0);
 			lst = next;
 		}
-		if (lst == NULL)
-			exit(1);
+		/*if (lst == NULL)
+			exit(1);*/
+		return (1);
 	}
+	return (0);
 }

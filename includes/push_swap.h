@@ -64,7 +64,7 @@ int	rr(t_list **head_a, t_list **head_b, t_swap *swap);
 int	rrx(t_list **head, t_swap *swap);
 int rrr(t_list **head_a, t_list **head_b, t_swap *swap);
 
-void check_sorted(t_list *lst);
+int check_sorted(t_list *lst);
 
 void	push_swap_sorter(t_swap *swap);
 void	sort_three(t_swap *swap);
