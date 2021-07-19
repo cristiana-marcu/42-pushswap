@@ -6,7 +6,7 @@
 /*   By: RAMON <RAMON@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/05 15:21:08 by cmarcu            #+#    #+#             */
-/*   Updated: 2021/07/19 19:22:52 by RAMON            ###   ########.fr       */
+/*   Updated: 2021/07/19 22:22:50 by RAMON            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int	get_next_line(int fd, char **line)
 	if (!re_acu)
 		re_acu = ft_strdup("");
 	//re = read(fd, buf, BUFFER_SIZE);
-	while (!ft_strchr(re_acu, '\n') && (re = read(fd, buf, BUFFER_SIZE) > 0))
+	while (!ft_strchr(re_acu, '\n') && ((re = read(fd, buf, BUFFER_SIZE)) > 0))
 	{
 		buf[re] = '\0';
 		temp = ft_strjoin(re_acu, buf);
