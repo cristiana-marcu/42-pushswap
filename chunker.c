@@ -3,19 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   chunker.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: RAMON <RAMON@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/05 17:15:04 by cmarcu            #+#    #+#             */
-/*   Updated: 2021/07/05 17:15:59 by cmarcu           ###   ########.fr       */
+/*   Updated: 2021/07/19 15:59:04 by RAMON            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/push_swap_checker.h"
-
-int	number_of_chunks(int lst_length)
-{
-	return ((lst_length + 233.333333) / 66.666666);
-}
 
 void	fill_chunk(t_swap *swap, int *chunk, int *stack_copy)
 {

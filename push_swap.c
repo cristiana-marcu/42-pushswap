@@ -3,28 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: RAMON <RAMON@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 12:02:00 by cmarcu            #+#    #+#             */
-/*   Updated: 2021/07/06 17:59:45 by cmarcu           ###   ########.fr       */
+/*   Updated: 2021/07/19 16:32:57 by RAMON            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/push_swap.h"
-
-void	free_split(char **temp)
-{
-	int	i;
-
-	i = 0;
-	while (temp[i])
-	{
-		free(temp[i]);
-		i++;
-	}
-	if (temp)
-		free(temp);
-}
 
 void	push_swap_fill(int argc, char **argv, t_swap *swap)
 {
@@ -102,25 +88,23 @@ void	chunk_algorithm(t_swap *swap)
 	int	i;
 	int	j;
 
-	j = 0;
-	while (j < number_of_chunks(swap->lst_length))
+	j = -1;
+	while (++j < number_of_chunks(swap->lst_length))
 	{
 		stack_copy = (int *)malloc(sizeof(int) * swap->lst_length);
 		chunk = (int *)malloc(sizeof(int) * swap->chunk_length);
 		copy_stack_to_array(swap->stack_a, stack_copy);
 		fill_chunk(swap, chunk, stack_copy);
-		i = 0;
-		while (i < swap->chunk_length)
+		i = -1;
+		while (++i < swap->chunk_length)
 		{
 			copy_stack_to_array(swap->stack_a, stack_copy);
 			position = retrieve_position(swap, chunk, stack_copy);
 			get_to_top(position, swap);
 			do_rule(swap, "pb");
-			i++;
 		}
 		free(stack_copy);
 		free(chunk);
-		j++;
 	}
 	push_back(swap);
 }
@@ -132,6 +116,7 @@ int	main(int argc, char **argv)
 	if (argc < 2)
 		return (0);
 	push_swap_fill(argc, argv, &push_swap);
-	check_sorted(push_swap.stack_a);
+	if (check_sorted(push_swap.stack_a))
+		exit(1);
 	push_swap_sorter(&push_swap);
 }

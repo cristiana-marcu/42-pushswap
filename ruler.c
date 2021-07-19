@@ -40,7 +40,7 @@ void	print_rule(char *rule)
 		print_error();
 }
 
-void	do_rule(t_swap *swap, char *rule)
+int	do_swap(t_swap *swap, char *rule)
 {
 	int	control;
 
@@ -51,7 +51,15 @@ void	do_rule(t_swap *swap, char *rule)
 		control = sb(swap);
 	else if (!(ft_strncmp(rule, "ss", 2)))
 		control = ss(swap);
-	else if (!(ft_strncmp(rule, "pb", 2)))
+	return (control);
+}
+
+void	do_rule(t_swap *swap, char *rule)
+{
+	int	control;
+
+	control = do_swap(swap, rule);
+	if (!(ft_strncmp(rule, "pb", 2)))
 		control = pb(&swap);
 	else if (!(ft_strncmp(rule, "pa", 2)))
 		control = pa(&swap);
@@ -75,14 +83,8 @@ void	do_rule_no_printing(t_swap *swap, char *rule)
 {
 	int	control;
 
-	control = 0;
-	if (!(ft_strncmp(rule, "sa", 2)))
-		control = sa(swap);
-	else if (!(ft_strncmp(rule, "sb", 2)))
-		control = sb(swap);
-	else if (!(ft_strncmp(rule, "ss", 2)))
-		control = ss(swap);
-	else if (!(ft_strncmp(rule, "pb", 2)))
+	control = do_swap(swap, rule);
+	if (!(ft_strncmp(rule, "pb", 2)))
 		control = pb(&swap);
 	else if (!(ft_strncmp(rule, "pa", 2)))
 		control = pa(&swap);

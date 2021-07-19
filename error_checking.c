@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_checking.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: RAMON <RAMON@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/24 13:55:52 by cmarcu            #+#    #+#             */
-/*   Updated: 2021/07/06 12:55:48 by cmarcu           ###   ########.fr       */
+/*   Updated: 2021/07/19 16:08:59 by RAMON            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,9 +74,8 @@ int	check_sorted(t_list *lst)
 					return (0);
 			lst = next;
 		}
-		/*if (lst == NULL)
-			exit(1);*/
-		return (1);
+		if (lst == NULL)
+			return (1);
 	}
 	return (0);
 }

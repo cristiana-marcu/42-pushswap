@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lst_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: RAMON <RAMON@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/24 13:48:18 by cmarcu            #+#    #+#             */
-/*   Updated: 2021/06/24 14:11:40 by cmarcu           ###   ########.fr       */
+/*   Updated: 2021/07/19 15:59:54 by RAMON            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,17 +70,4 @@ void	ft_lstiter(t_list *lst, void (*f)(int))
 		(*f)(lst->content);
 		lst = lst->next;
 	}
-}
-
-int	ft_lstsize(t_list *lst)
-{
-	int	result;
-
-	result = 0;
-	while (lst)
-	{
-		lst = lst->next;
-		result++;
-	}
-	return (result);
 }

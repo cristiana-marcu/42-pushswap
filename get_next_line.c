@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: RAMON <RAMON@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/05 15:21:08 by cmarcu            #+#    #+#             */
-/*   Updated: 2021/07/05 17:23:08 by cmarcu           ###   ########.fr       */
+/*   Updated: 2021/07/19 16:49:39 by RAMON            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,12 +73,14 @@ int	get_next_line(int fd, char **line)
 		return (-1);
 	if (!re_acu)
 		re_acu = ft_strdup("");
-	while (!ft_strchr(re_acu, '\n') && (re = read(fd, buf, BUFFER_SIZE)) > 0)
+	//re = read(fd, buf, BUFFER_SIZE);
+	while (!ft_strchr(re_acu, '\n') && ((re = read(fd, buf, BUFFER_SIZE)) > 0))
 	{
 		buf[re] = '\0';
 		temp = ft_strjoin(re_acu, buf);
 		delmem(&re_acu);
 		re_acu = temp;
+		//re = read(fd, buf, BUFFER_SIZE);
 	}
 	if (re == 0)
 		*line = ft_strdup(re_acu);
