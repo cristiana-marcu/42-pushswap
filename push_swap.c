@@ -6,7 +6,7 @@
 /*   By: RAMON <RAMON@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 12:02:00 by cmarcu            #+#    #+#             */
-/*   Updated: 2021/07/19 16:32:57 by RAMON            ###   ########.fr       */
+/*   Updated: 2021/07/19 18:29:21 by RAMON            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,4 +119,5 @@ int	main(int argc, char **argv)
 	if (check_sorted(push_swap.stack_a))
 		exit(1);
 	push_swap_sorter(&push_swap);
+	printf("Number of moves: %d\n", push_swap.moves);
 }
