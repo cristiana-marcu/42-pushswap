@@ -6,7 +6,7 @@
 /*   By: RAMON <RAMON@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/05 17:15:04 by cmarcu            #+#    #+#             */
-/*   Updated: 2021/07/19 15:59:04 by RAMON            ###   ########.fr       */
+/*   Updated: 2021/07/19 18:48:31 by RAMON            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,14 +60,14 @@ int	retrieve_position(t_swap *swap, int *chunk, int *stk)
 	lst_length = ft_lstsize(swap->stack_a);
 	i = -1;
 	hold_first = -1;
-	hold_second = -1;
+	hold_second = 0;
 	while (++i < lst_length / 2 && hold_first == -1)
 	{
 		if ((stk[i] >= chunk[0]) && (stk[i] <= chunk[swap->chunk_length - 1]))
 			hold_first = i;
 	}
 	i = lst_length;
-	while (--i >= lst_length / 2 && hold_second == -1)
+	while (--i >= lst_length / 2 && hold_second == 0)
 	{
 		if ((stk[i] >= chunk[0]) && (stk[i] <= chunk[swap->chunk_length - 1]))
 			hold_second = i;
