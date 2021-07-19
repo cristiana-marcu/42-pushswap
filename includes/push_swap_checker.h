@@ -81,7 +81,7 @@ void push_back(t_swap *swap);
 int max_position(t_list *stack);
 void get_to_top(int pos, t_swap *swap);
 void get_to_top_b(int pos, t_swap *swap);
-int retrieve_position(t_swap *swap, int *chunk, int*stack);
+int retrieve_position(t_swap *swap, int *chunk, int*stk);
 
 void print_error(void);
 void	f(int n);

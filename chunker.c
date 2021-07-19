@@ -55,7 +55,7 @@ void	copy_stack_to_array(t_list *stack, int *stack_copy)
 	}
 }
 
-int	retrieve_position(t_swap *swap, int *chunk, int*stack)
+int	retrieve_position(t_swap *swap, int *chunk, int *stk)
 {
 	int	i;
 	int	hold_first;
@@ -64,27 +64,21 @@ int	retrieve_position(t_swap *swap, int *chunk, int*stack)
 
 	lst_length = ft_lstsize(swap->stack_a);
 	i = -1;
-	hold_first = 0;
-	hold_second = lst_length - 1;
-	while (++i < lst_length / 2)
+	hold_first = -1;
+	hold_second = -1;
+	while (++i < lst_length / 2 && hold_first == -1)
 	{
-		if ((stack[i] >= chunk[0]) && (stack[i] <= chunk[swap->chunk_length - 1]))
-		{
+		if ((stk[i] >= chunk[0]) && (stk[i] <= chunk[swap->chunk_length - 1]))
 			hold_first = i;
-			break ;
-		}
 	}
 	i = lst_length;
-	while (--i >= lst_length / 2)
+	while (--i >= lst_length / 2 && hold_second == -1)
 	{
-		if ((stack[i] >= chunk[0]) && (stack[i] <= chunk[swap->chunk_length - 1]))
-		{
+		if ((stk[i] >= chunk[0]) && (stk[i] <= chunk[swap->chunk_length - 1]))
 			hold_second = i;
-			break ;
-		}
 	}
-	// Fix return values
-	if (((hold_first < swap->lst_length - hold_second) && hold_second >= 0 && hold_first >= 0) || hold_second > swap->lst_length)
+	if (((hold_first < swap->lst_length - hold_second) && hold_second >= 0
+			&& hold_first >= 0) || hold_second > swap->lst_length)
 		return (hold_first);
 	else
 		return (hold_second);
