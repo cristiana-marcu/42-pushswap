@@ -6,7 +6,7 @@
 #    By: RAMON <RAMON@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/26 11:58:16 by cmarcu            #+#    #+#              #
-#    Updated: 2021/07/19 16:00:33 by RAMON            ###   ########.fr        #
+#    Updated: 2021/07/19 17:51:31 by RAMON            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,7 +44,7 @@ $(LIBFT):
 bonus: $(OBJS_BONUS)
 	@$(CC) $(LDFLAGS) $(OBJS_BONUS) -I $(INCLUDES) -o checker
 
-ARG :=	$(shell seq 0 100 | sort -R)
+ARG :=	$(shell seq 0 499 | sort -R)
 
 exe: $(NAME)
 	./push_swap $(ARG)
