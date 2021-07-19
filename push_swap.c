@@ -26,7 +26,7 @@ void	free_split(char **temp)
 		free(temp);
 }
 
-void push_swap_fill(int argc, char **argv, t_swap *swap)
+void	push_swap_fill(int argc, char **argv, t_swap *swap)
 {
 	int		i;
 	int		j;
@@ -53,12 +53,12 @@ void push_swap_fill(int argc, char **argv, t_swap *swap)
 	swap->lst_length = ft_lstsize(swap->stack_a);
 }
 
-int max_position(t_list *stack)
+int	max_position(t_list *stack)
 {
-	t_list *aux;
-	int max;
-	int pos;
-	int i;
+	t_list	*aux;
+	int		max;
+	int		pos;
+	int		i;
 
 	aux = stack;
 	max = aux->content;
@@ -77,11 +77,11 @@ int max_position(t_list *stack)
 	return (pos);
 }
 
-void push_back(t_swap *swap)
+void	push_back(t_swap *swap)
 {
-	int position;
-	int i;
-	int b_length;
+	int	position;
+	int	i;
+	int	b_length;
 
 	b_length = ft_lstsize(swap->stack_b);
 	i = 0;
@@ -94,19 +94,19 @@ void push_back(t_swap *swap)
 	}
 }
 
-void chunk_algorithm(t_swap *swap)
+void	chunk_algorithm(t_swap *swap)
 {
-	int *stack_copy;
-	int *chunk;
-	int position;
-	int i;
-	int j;
+	int	*stack_copy;
+	int	*chunk;
+	int	position;
+	int	i;
+	int	j;
 
 	j = 0;
 	while (j < number_of_chunks(swap->lst_length))
 	{
-		stack_copy = (int*)malloc(sizeof(int) * swap->lst_length);
-		chunk = (int*)malloc(sizeof(int) * swap->chunk_length);
+		stack_copy = (int *)malloc(sizeof(int) * swap->lst_length);
+		chunk = (int *)malloc(sizeof(int) * swap->chunk_length);
 		copy_stack_to_array(swap->stack_a, stack_copy);
 		fill_chunk(swap, chunk, stack_copy);
 		i = 0;
@@ -122,24 +122,16 @@ void chunk_algorithm(t_swap *swap)
 		free(chunk);
 		j++;
 	}
-	//printf("Tamaño stack_a: %d\n", ft_lstsize(swap->stack_a));
-	//printf("Stack_a: %d\n", swap->stack_a->content);
 	push_back(swap);
 }
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
-	t_swap push_swap;
+	t_swap	push_swap;
 
 	if (argc < 2)
-	 	return (0);
+		return (0);
 	push_swap_fill(argc, argv, &push_swap);
 	check_sorted(push_swap.stack_a);
 	push_swap_sorter(&push_swap);
-	//printf("Number of moves: %d\n", push_swap.moves);
-	//ft_lstiter(push_swap.stack_a, f);
-	//printf("Number of moves: %d\n", push_swap.moves);
-	//ft_lstiter(push_swap.stack_a, f);
-	//ft_lstiter(push_swap.stack_b, f);
-	//system("leaks push_swap");
 }

@@ -26,7 +26,7 @@ void	free_split(char **temp)
 		free(temp);
 }
 
-void push_swap_fill(int argc, char **argv, t_swap *swap)
+void	push_swap_fill(int argc, char **argv, t_swap *swap)
 {
 	int		i;
 	int		j;
@@ -57,6 +57,7 @@ void	push_swap_checker(t_swap *swap)
 {
 	int		n;
 	char	*line;
+
 	while (get_next_line(0, &line) > 0)
 	{
 		if (!(ft_strncmp("sa", line, 2)))
@@ -86,25 +87,19 @@ void	push_swap_checker(t_swap *swap)
 		free(line);
 	}
 	n = check_sorted(swap->stack_a);
-	//printf("Sorted: %d\n", n);
 	if (n && !swap->stack_b)
 		write(1, "OK\n", 3);
 	else
 		write(1, "KO\n", 3);
 }
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
-	t_swap push_swap;
+	t_swap	push_swap;
 
 	if (argc < 2)
-	 	return (0);
+		return (0);
 	push_swap_fill(argc, argv, &push_swap);
 	check_sorted(push_swap.stack_a);
 	push_swap_checker(&push_swap);
-	//printf("Number of moves: %d\n", push_swap.moves);
-	//ft_lstiter(push_swap.stack_a, f);
-	//printf("Number of moves: %d\n", push_swap.moves);
-	//ft_lstiter(push_swap.stack_b, f);
-	//system("leaks push_swap");
 }

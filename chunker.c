@@ -12,16 +12,16 @@
 
 #include "includes/push_swap_checker.h"
 
-int number_of_chunks(int lst_length)
+int	number_of_chunks(int lst_length)
 {
 	return ((lst_length + 233.333333) / 66.666666);
 }
 
-void fill_chunk(t_swap *swap, int *chunk, int *stack_copy)
+void	fill_chunk(t_swap *swap, int *chunk, int *stack_copy)
 {
-	int j;
-	int i;
-	int chunk_length;
+	int	j;
+	int	i;
+	int	chunk_length;
 
 	chunk_length = swap->chunk_length;
 	j = 1;
@@ -40,10 +40,10 @@ void fill_chunk(t_swap *swap, int *chunk, int *stack_copy)
 	}
 }
 
-void copy_stack_to_array(t_list *stack, int *stack_copy)
+void	copy_stack_to_array(t_list *stack, int *stack_copy)
 {
-	t_list *aux;
-	int i;
+	t_list	*aux;
+	int		i;
 
 	i = 0;
 	aux = stack;
@@ -55,12 +55,12 @@ void copy_stack_to_array(t_list *stack, int *stack_copy)
 	}
 }
 
-int retrieve_position(t_swap *swap, int *chunk, int*stack)
+int	retrieve_position(t_swap *swap, int *chunk, int*stack)
 {
-	int i;
-	int hold_first;
-	int hold_second;
-	int lst_length;
+	int	i;
+	int	hold_first;
+	int	hold_second;
+	int	lst_length;
 
 	lst_length = ft_lstsize(swap->stack_a);
 	i = -1;
@@ -90,7 +90,7 @@ int retrieve_position(t_swap *swap, int *chunk, int*stack)
 		return (hold_second);
 }
 
-void get_to_top(int pos, t_swap *swap)
+void	get_to_top(int pos, t_swap *swap)
 {
 	if (pos <= swap->lst_length / 2)
 		repeat_rule_rotate(pos, "ra", swap);
@@ -98,9 +98,9 @@ void get_to_top(int pos, t_swap *swap)
 		repeat_rule_rotate(swap->lst_length - pos + 1, "rra", swap);
 }
 
-void get_to_top_b(int pos, t_swap *swap)
+void	get_to_top_b(int pos, t_swap *swap)
 {
-	int b_length;
+	int	b_length;
 
 	b_length = ft_lstsize(swap->stack_b);
 	if (pos <= b_length / 2)

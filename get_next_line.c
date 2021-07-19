@@ -26,7 +26,7 @@ void	ft_bzero(char *s, size_t n)
 	}
 }
 
-int		delmem(char **p)
+int	delmem(char **p)
 {
 	if (p)
 	{
@@ -41,7 +41,7 @@ int		delmem(char **p)
 	return (0);
 }
 
-int		mount_next_line(int re, char **re_acu, char **line)
+int	mount_next_line(int re, char **re_acu, char **line)
 {
 	int		aux;
 	char	*temp;
@@ -61,7 +61,7 @@ int		mount_next_line(int re, char **re_acu, char **line)
 	return (1);
 }
 
-int		get_next_line(int fd, char **line)
+int	get_next_line(int fd, char **line)
 {
 	int			re;
 	char		buf[BUFFER_SIZE + 1];

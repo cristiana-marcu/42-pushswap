@@ -23,44 +23,45 @@ void	push_swap_sorter(t_swap *swap)
 	else
 	{
 		swap->lst_length = ft_lstsize(swap->stack_a);
-		swap->chunk_length = (swap->lst_length / number_of_chunks(swap->lst_length)) + 1;
+		swap->chunk_length = (swap->lst_length
+				/ number_of_chunks(swap->lst_length)) + 1;
 		chunk_algorithm(swap);
 	}
 }
 
 void	sort_three(t_swap *swap)
 {
-	int n1;
-	int n2;
-	int n3;
+	int	n1;
+	int	n2;
+	int	n3;
 
 	n1 = swap->stack_a->content;
 	n2 = swap->stack_a->next->content;
 	n3 = swap->stack_a->next->next->content;
-	if (n1 > n2 && n1 > n3 && n2 > n3) // 3 2 1
+	if (n1 > n2 && n1 > n3 && n2 > n3)
 	{
 		do_rule(swap, "sa");
 		do_rule(swap, "rra");
 	}
-	else if (n1 < n2 && n1 < n3 && n2 > n3) // 1 3 2
+	else if (n1 < n2 && n1 < n3 && n2 > n3)
 	{
 		do_rule(swap, "sa");
 		do_rule(swap, "ra");
 	}
-	else if (n1 > n2 && n1 < n3 && n2 < n3) // 2 1 3
+	else if (n1 > n2 && n1 < n3 && n2 < n3)
 		do_rule(swap, "sa");
-	else if (n1 < n2 && n1 > n3 && n2 > n3) // 2 3 1
+	else if (n1 < n2 && n1 > n3 && n2 > n3)
 		do_rule(swap, "rra");
-	else if (n1 > n2 && n1 > n3 && n2 < n3) // 3 1 2
+	else if (n1 > n2 && n1 > n3 && n2 < n3)
 		do_rule(swap, "ra");
 }
 
-int min_position(t_list *stack)
+int	min_position(t_list *stack)
 {
-	t_list *aux;
-	int min;
-	int pos;
-	int i;
+	t_list	*aux;
+	int		min;
+	int		pos;
+	int		i;
 
 	aux = stack;
 	if (aux)
@@ -82,10 +83,10 @@ int min_position(t_list *stack)
 
 void	sort_more(t_swap *swap)
 {
-	int length;
-	int j;
-	int pos;
-	t_list *aux;
+	int		length;
+	int		j;
+	int		pos;
+	t_list	*aux;
 
 	j = -1;
 	aux = swap->stack_a;
@@ -97,7 +98,6 @@ void	sort_more(t_swap *swap)
 			repeat_rule_rotate(pos, "ra", swap);
 		else if (pos > length / 2)
 			repeat_rule_rotate(length - pos, "rra", swap);
-		//swap->stack_a = aux;
 		do_rule(swap, "pb");
 		aux = swap->stack_a;
 	}

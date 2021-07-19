@@ -88,7 +88,6 @@ void	repeat_rule_rotate(int n, char *str, t_swap *swap)
 	i = -1;
 	if (!(ft_strncmp(str, "ra", 2)))
 	{
-		//head = &swap->stack_a;
 		while (++i < n)
 			do_rule(swap, "ra");
 	}
