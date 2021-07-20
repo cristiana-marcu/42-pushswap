@@ -6,7 +6,7 @@
 /*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 14:05:31 by cmarcu            #+#    #+#             */
-/*   Updated: 2021/03/31 15:27:47 by cmarcu           ###   ########.fr       */
+/*   Updated: 2021/07/20 17:22:44 by cmarcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,5 +74,5 @@ void				ft_lstiter(t_list *lst, void (*f)(void *));
 t_list				*ft_lstmap(t_list *lst, void *(*f)(void *),
 						void (*del)(void *));
 
-void print_error(void);
+void				print_error(void);
 #endif

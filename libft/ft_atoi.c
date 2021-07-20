@@ -6,13 +6,12 @@
 /*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/08 18:09:38 by cmarcu            #+#    #+#             */
-/*   Updated: 2021/06/24 18:06:44 by cmarcu           ###   ########.fr       */
+/*   Updated: 2021/07/20 17:21:44 by cmarcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-//#include "../includes/push_swap.h"
-#include <limits.h> // Int min and max values
+#include <limits.h>
 
 int	ft_isspace(char *str)
 {
@@ -27,9 +26,9 @@ int	ft_isspace(char *str)
 
 int	ft_atoi(const char *str)
 {
-	int	a;
-	long number;
-	int	is_neg;
+	int		a;
+	long	number;
+	int		is_neg;
 
 	a = ft_isspace((char *)str);
 	is_neg = 0;
@@ -46,7 +45,7 @@ int	ft_atoi(const char *str)
 		number = number * 10 + (str[a] - '0');
 		a++;
 	}
-	if ((is_neg && -number < INT_MIN) || number > INT_MAX)
+	if ((is_neg && (-number) < INT_MIN) || number > INT_MAX)
 		print_error();
 	if (is_neg)
 		return (-number);

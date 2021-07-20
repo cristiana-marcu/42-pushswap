@@ -6,12 +6,12 @@
 /*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 16:43:13 by cmarcu            #+#    #+#             */
-/*   Updated: 2021/06/24 17:10:51 by cmarcu           ###   ########.fr       */
+/*   Updated: 2021/07/20 17:22:21 by cmarcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-# include <stdio.h> // Printf, scanf
+#include <stdio.h> // Printf, scanf
 
 static char	**ft_mountarray(char const *s, char c)
 {
@@ -63,6 +63,7 @@ static char	**ft_fill_array(char const *s, char **array, char c)
 char	**ft_split(char const *s, char c)
 {
 	char	**array;
+
 	if (!s)
 		return (NULL);
 	array = ft_mountarray(s, c);
