@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checker.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: RAMON <RAMON@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/05 15:26:27 by cmarcu            #+#    #+#             */
-/*   Updated: 2021/07/19 19:22:06 by RAMON            ###   ########.fr       */
+/*   Updated: 2021/07/20 16:30:58 by cmarcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,7 @@ void	do_swappush_no_print(t_swap *swap, char *line)
 	else if (!(ft_strncmp("pa", line, 2)))
 		do_rule_no_printing(swap, "pa");
 	else
-	{
-		//printf("Line right now: %s", line);
 		print_error();
-	}
 }
 
 void	push_swap_checker(t_swap *swap)
