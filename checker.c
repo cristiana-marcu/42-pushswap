@@ -6,7 +6,7 @@
 /*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/05 15:26:27 by cmarcu            #+#    #+#             */
-/*   Updated: 2021/07/20 16:30:58 by cmarcu           ###   ########.fr       */
+/*   Updated: 2021/07/20 17:00:22 by cmarcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ void	push_swap_checker(t_swap *swap)
 			do_swappush_no_print(swap, line);
 		free(line);
 	}
+	free(line);
 	if (check_sorted(swap->stack_a) && !swap->stack_b)
 		write(1, "OK\n", 3);
 	else
